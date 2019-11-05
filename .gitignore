@@ -26,6 +26,7 @@ lib/
 local/
 parts/
 src/*
+.idea/
 
 # excludes
 !.coveragerc
@@ -34,3 +35,4 @@ src/*
 !.gitignore
 !.gitkeep
 !.travis.yml
+
