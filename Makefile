@@ -20,7 +20,7 @@ cleanall:
 .PHONY: bootstrap
 bootstrap:
 	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python$(py) .;fi
-	./bin/pip install -r requirements.txt
+	bin/pip install -r requirements.txt
 
 .PHONY: plone-5.1
 plone-5.1:
