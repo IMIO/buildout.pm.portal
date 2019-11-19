@@ -25,6 +25,7 @@ include/
 lib/
 local/
 parts/
+var/
 src/*
 .idea/
 
