@@ -10,14 +10,13 @@ dev:
 	./bin/pip install -r requirements.txt
 	./bin/buildout -t 30
 
+.PHONY: run
 run:
-	bin/instance
 	bin/instance fg
 
 .PHONY: cleanall
 cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg pip-selfcheck.json local
-
 
 .PHONY: bootstrap
 bootstrap:
