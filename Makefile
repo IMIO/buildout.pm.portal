@@ -1,5 +1,6 @@
 py:=2.7
 plone:=5.1
+IMAGE_NAME="docker-staging.imio.be/iadelib/citizenportal:alpine"
 
 all: dev
 
@@ -35,5 +36,9 @@ plone-5.2:
 	./bin/buildout -t 30 -c plone-5.2.x.cfg
 
 .PHONY: docker-image
-docker-image:
-	docker build --pull -t iadelib/citizenportal:latest .
+docker-image: eggs
+	docker build --pull -t iadelib/citizenportal:alpine .
+
+eggs:  ## Copy eggs from docker image to speed up docker build
+	-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
+	mkdir -p eggs
