@@ -33,3 +33,7 @@ plone-5.2:
 	make cleanall
 	make bootstrap plone=5.2
 	./bin/buildout -t 30 -c plone-5.2.x.cfg
+
+.PHONY: docker-image
+docker-image:
+	docker build --pull -t iadelib/citizenportal:latest .
