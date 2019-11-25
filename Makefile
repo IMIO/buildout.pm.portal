@@ -37,7 +37,7 @@ plone-5.2:
 
 .PHONY: docker-image
 docker-image: eggs
-	docker build --pull -t iadelib/citizenportal:alpine .
+	docker build --pull -t iadelib/citizenportal:alpine -t iadelib/citizenportal:latest .
 
 eggs:  ## Copy eggs from docker image to speed up docker build
 	-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
