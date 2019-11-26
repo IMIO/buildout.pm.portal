@@ -10,6 +10,10 @@ dev:
 	if ! test -f bin/buildout;then make bootstrap;fi
 	bin/buildout -t 30
 
+.PHONY: test
+test:dev
+	bin/test
+
 .PHONY: run
 run:
 	bin/instance fg
