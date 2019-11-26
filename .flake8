@@ -1,0 +1,10 @@
+[flake8]
+exclude =
+    .git,
+    bin,
+    develop-eggs,
+    include,
+    var,
+    lib,
+    local,
+    parts,
