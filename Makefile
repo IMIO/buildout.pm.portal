@@ -1,4 +1,4 @@
-py:=2.7
+py:=3.7
 IMAGE_NAME="docker-staging.imio.be/iadelib/citizenportal:latest"
 
 all: dev
