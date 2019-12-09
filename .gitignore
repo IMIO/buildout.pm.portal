@@ -28,6 +28,7 @@ parts/
 var/
 src/*
 .idea/
+share/
 
 # excludes
 !.coveragerc
