@@ -30,7 +30,7 @@ pipeline {
             }
             steps {
                 sh "mco shell run 'docker pull docker-staging.imio.be/iadelib/citizenportal:$BUILD_ID' -I /^staging.imio.be/"
-                sh "mco shell run '/srv/docker_scripts/website-update-all-images.sh' -t 1200 --tail -I /^staging.imio.be/"
+                sh "mco shell run 'systemctl restart website-conseil.service' -t 1200 --tail -I /^staging.imio.be/"
             }
         }
         stage('Deploy to prod ?') {
@@ -54,12 +54,7 @@ pipeline {
         stage('Deploying to prod') {
             agent any
             steps {
-                deployToProd (
-                    env.BUILD_ID,
-                    'iadelib/citizenportal',
-                    'role::docker::sites$',
-                    '/srv/docker_scripts/website-update-all-images.sh',
-                )
+                echo 'Todo'
             }
         }
     }
