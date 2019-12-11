@@ -1,4 +1,4 @@
-FROM docker-staging.imio.be/base:alpine as builder
+FROM docker-staging.imio.be/base:alpinepy3 as builder
 ENV PIP=9.0.3 \
   ZC_BUILDOUT=2.13.2 \
   SETUPTOOLS=41.0.1 \
@@ -27,10 +27,11 @@ WORKDIR /plone
 RUN chown imio:imio -R /plone && mkdir /data && chown imio:imio -R /data
 COPY --chown=imio eggs /plone/eggs/
 COPY --chown=imio *.cfg /plone/
-RUN su -c "buildout -c prod.cfg" -s /bin/sh imio
+RUN rm -f .installed.cfg .mr.developer.cfg
+RUN su -c "buildout -t 45 -c prod.cfg" -s /bin/sh imio
 
 
-FROM docker-staging.imio.be/base:alpine
+FROM docker-staging.imio.be/base:alpinepy3
 
 ENV PIP=9.0.3 \
   ZC_BUILDOUT=2.13.2 \
@@ -60,7 +61,7 @@ LABEL plone=$PLONE_VERSION \
   description="Plone image for PM Citizen Portal" \
   maintainer="Imio"
 
-COPY --from=builder /usr/local/lib/python2.7/site-packages /usr/local/lib/python2.7/site-packages
+COPY --from=builder /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
 COPY --chown=imio --from=builder /plone .
 
 COPY --chown=imio docker-initialize.py docker-entrypoint.sh /
