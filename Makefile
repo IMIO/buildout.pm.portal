@@ -23,12 +23,12 @@ cleanall:
 
 .PHONY: bootstrap
 bootstrap:
-	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python$(py) .;fi
+	virtualenv -p python$(py) .
 	bin/pip install -r requirements.txt
 
 .PHONY: docker-image
-docker-image: eggs
-	docker build --pull -t iadelib/citizenportal:latest .
+docker-image:
+	docker build --no-cache --pull -t iadelib/citizenportal:latest .
 
 eggs:  ## Copy eggs from docker image to speed up docker build
 	-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
