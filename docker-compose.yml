@@ -29,6 +29,8 @@ services:
       - "traefik.http.routers.instance.rule=Host(`portal.localhost`)"
       - "traefik.http.routers.instance.entrypoints=web"
       - "traefik.http.services.instance.loadbalancer.server.port=8081"
+      - "traefik.http.routers.instance.middlewares=add-plone"
+      - "traefik.http.middlewares.add-plone.addprefix.prefix=/VirtualHostBase/http/portal.localhost/conseil/VirtualHostRoot"
   reverseproxy:
     image: traefik:2.0 # The official Traefik docker image
           #- "--log.level=DEBUG"
