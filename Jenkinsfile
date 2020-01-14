@@ -54,7 +54,8 @@ pipeline {
         stage('Deploying to prod') {
             agent any
             steps {
-                echo 'Todo'
+                sh "mco shell run 'docker pull docker-staging.imio.be/iadelib/citizenportal:$BUILD_ID' -I /^site-prod13.imio.be/"
+                sh "mco shell run 'systemctl restart website-conseil.service' -t 1200 --tail -I /^site-prod13.imio.be/"
             }
         }
     }
