@@ -1,10 +1,6 @@
 FROM docker-staging.imio.be/base:alpinepy3 as builder
-ENV PIP=9.0.3 \
-  ZC_BUILDOUT=2.13.2 \
-  SETUPTOOLS=41.0.1 \
-  WHEEL=0.31.1 \
-  PLONE_MAJOR=5.2 \
-  PLONE_VERSION=5.2.0
+ENV PLONE_MAJOR=5.2 \
+  PLONE_VERSION=5.2.1
 
 RUN apk add --update --no-cache --virtual .build-deps \
   build-base \
@@ -22,7 +18,7 @@ RUN apk add --update --no-cache --virtual .build-deps \
   pcre-dev \
   wget \
   zlib-dev \
-  && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT wheel==$WHEEL
+  && pip install -U pip setuptools zc.buildout
 WORKDIR /plone
 RUN chown imio:imio -R /plone && mkdir /data && chown imio:imio -R /data
 COPY --chown=imio eggs /plone/eggs/
@@ -34,12 +30,8 @@ RUN su -c "buildout -t 45 -c prod.cfg" -s /bin/sh imio
 
 FROM docker-staging.imio.be/base:alpinepy3
 
-ENV PIP=9.0.3 \
-  ZC_BUILDOUT=2.13.2 \
-  SETUPTOOLS=41.0.1 \
-  WHEEL=0.31.1 \
-  PLONE_MAJOR=5.2 \
-  PLONE_VERSION=5.2.0 \
+ENV PLONE_MAJOR=5.2 \
+  PLONE_VERSION=5.2.1 \
   TZ=Europe/Brussel
 
 RUN mkdir /data && chown imio:imio -R /data
@@ -58,7 +50,7 @@ RUN apk add --no-cache --virtual .run-deps \
 LABEL plone=$PLONE_VERSION \
   os="alpine" \
   os.version="3.10" \
-  name="Plone 5.2.0" \
+  name="Plone 5.2.1" \
   description="Plone image for PM Citizen Portal" \
   maintainer="Imio"
 
