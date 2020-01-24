@@ -35,5 +35,6 @@ docker-image:
 eggs:  ## Copy eggs from docker image to speed up docker build
 	rm -Rf eggs
 	mkdir -p eggs
-	# docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
+	docker pull $(IMAGE_NAME)
+	docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
 
