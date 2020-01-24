@@ -27,9 +27,13 @@ bootstrap:
 	bin/pip install -r requirements.txt
 
 .PHONY: docker-image
-docker-image:eggs
+docker-image:
+	make eggs
 	docker build --no-cache --pull -t iadelib/citizenportal:latest .
 
+.PHONY: eggs
 eggs:  ## Copy eggs from docker image to speed up docker build
-	-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
+	rm -Rf eggs
 	mkdir -p eggs
+	# docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
+
