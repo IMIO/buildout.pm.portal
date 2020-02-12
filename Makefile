@@ -7,6 +7,8 @@ all: dev
 dev:
 	ln -fs dev.cfg buildout.cfg
 	if ! test -f bin/buildout;then make bootstrap;fi
+	bin/pip install -U pip
+	bin/pip install -r requirements.txt
 	bin/buildout -t 30
 
 .PHONY: test
