@@ -14,6 +14,9 @@ log.html
 output.xml
 pip-selfcheck.json
 report.html
+package-lock.json
+package.json
+Gruntfile.js
 
 #dirs
 bin/
@@ -24,6 +27,7 @@ htmlcov/
 include/
 lib/
 local/
+node_modules/
 parts/
 var/
 src/*
