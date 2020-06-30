@@ -40,3 +40,7 @@ eggs:  ## Copy eggs from docker image to speed up docker build
 	docker pull $(IMAGE_NAME)
 	docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
 
+.PHONY: css
+css:  ## Compile css
+	bin/plone-compile-resources --bundle=plonemeeting.portal.core
+
