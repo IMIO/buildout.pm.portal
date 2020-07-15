@@ -8,7 +8,6 @@ RUN apk add --update --no-cache --virtual .build-deps \
   git \
   libc-dev \
   libffi-dev \
-  libffi-dev \
   libjpeg-turbo-dev \
   libpng-dev \
   libwebp-dev \
