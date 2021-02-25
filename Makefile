@@ -1,4 +1,3 @@
-py:=3
 IMAGE_NAME="docker-staging.imio.be/iadelib/citizenportal:latest"
 
 all: dev
@@ -9,7 +8,15 @@ dev:
 	if ! test -f bin/buildout;then make bootstrap;fi
 	bin/pip install -U pip
 	bin/pip install -r requirements.txt
-	bin/buildout -t 30
+	bin/buildout
+
+.PHONY: prod
+prod:
+	ln -fs prod.cfg buildout.cfg
+	if ! test -f bin/buildout;then make bootstrap;fi
+	bin/pip install -U pip
+	bin/pip install -r requirements.txt
+	bin/buildout
 
 .PHONY: test
 test:dev
@@ -25,7 +32,7 @@ cleanall:
 
 .PHONY: bootstrap
 bootstrap:
-	virtualenv -p python$(py) .
+	virtualenv -p python3 .
 	bin/pip install -r requirements.txt
 
 .PHONY: docker-image

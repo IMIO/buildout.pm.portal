@@ -1,6 +1,6 @@
 FROM docker-staging.imio.be/base:alpinepy3 as builder
 ENV PLONE_MAJOR=5.2 \
-  PLONE_VERSION=5.2.1
+  PLONE_VERSION=5.2.3
 
 RUN apk add --update --no-cache --virtual .build-deps \
   build-base \
@@ -30,7 +30,7 @@ RUN su -c "buildout -t 45 -c prod.cfg" -s /bin/sh imio
 FROM docker-staging.imio.be/base:alpinepy3
 
 ENV PLONE_MAJOR=5.2 \
-  PLONE_VERSION=5.2.1 \
+  PLONE_VERSION=5.2.3 \
   TZ=Europe/Brussel
 
 RUN mkdir /data && chown imio:imio -R /data
@@ -49,7 +49,7 @@ RUN apk add --no-cache --virtual .run-deps \
 LABEL plone=$PLONE_VERSION \
   os="alpine" \
   os.version="3.10" \
-  name="Plone 5.2.1" \
+  name="Plone 5.2.3" \
   description="Plone image for PM Citizen Portal" \
   maintainer="Imio"
 
