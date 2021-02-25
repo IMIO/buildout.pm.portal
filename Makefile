@@ -4,6 +4,7 @@ all: dev
 
 .PHONY: dev
 dev:
+	make cleanall
 	ln -fs dev.cfg buildout.cfg
 	if ! test -f bin/buildout;then make bootstrap;fi
 	bin/pip install -U pip
@@ -12,6 +13,7 @@ dev:
 
 .PHONY: prod
 prod:
+	make cleanall
 	ln -fs prod.cfg buildout.cfg
 	if ! test -f bin/buildout;then make bootstrap;fi
 	bin/pip install -U pip
@@ -28,7 +30,7 @@ run:
 
 .PHONY: cleanall
 cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg pip-selfcheck.json local
+	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg pip-selfcheck.json local .git/hooks/pre-commit
 
 .PHONY: bootstrap
 bootstrap:
