@@ -17,14 +17,18 @@ RUN apk add --update --no-cache --virtual .build-deps \
   pcre-dev \
   wget \
   zlib-dev \
-  && pip install -U pip setuptools zc.buildout
+  && pip install -U pip setuptools zc.buildout \
+  && mkdir -p /plone /data \
+  && chown imio:imio -R /plone \
+  && chown imio:imio -R /data
 WORKDIR /plone
-RUN chown imio:imio -R /plone && mkdir /data && chown imio:imio -R /data
 COPY --chown=imio eggs /plone/eggs/
 COPY --chown=imio scripts /plone/scripts/
-COPY --chown=imio *.cfg /plone/
+COPY --chown=imio *.cfg requirements.txt /plone/
 RUN rm -f .installed.cfg .mr.developer.cfg
-RUN su -c "buildout -t 45 -c prod.cfg" -s /bin/sh imio
+USER imio
+RUN pip install -r requirements.txt \
+  && buildout -vvv -c prod.cfg
 
 
 FROM docker-staging.imio.be/base:alpinepy3
@@ -48,7 +52,6 @@ RUN apk add --no-cache --virtual .run-deps \
 
 LABEL plone=$PLONE_VERSION \
   os="alpine" \
-  os.version="3.10" \
   name="Plone 5.2.3" \
   description="Plone image for PM Citizen Portal" \
   maintainer="Imio"
