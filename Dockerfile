@@ -2,6 +2,16 @@ FROM docker-staging.imio.be/base:alpinepy3 as builder
 ENV PLONE_MAJOR=5.2 \
   PLONE_VERSION=5.2.3
 
+RUN mkdir -p /plone /data \
+  && chown imio:imio -R /plone \
+  && chown imio:imio -R /data
+
+# COPY --chown=imio eggs /plone/eggs/
+COPY --chown=imio scripts /plone/scripts/
+COPY --chown=imio *.cfg requirements.txt /plone/
+
+WORKDIR /plone
+
 RUN apk add --update --no-cache --virtual .build-deps \
   build-base \
   gcc \
@@ -17,18 +27,12 @@ RUN apk add --update --no-cache --virtual .build-deps \
   pcre-dev \
   wget \
   zlib-dev \
-  && pip install -U pip setuptools zc.buildout \
-  && mkdir -p /plone /data \
-  && chown imio:imio -R /plone \
-  && chown imio:imio -R /data
-WORKDIR /plone
-# COPY --chown=imio eggs /plone/eggs/
-COPY --chown=imio scripts /plone/scripts/
-COPY --chown=imio *.cfg requirements.txt /plone/
-RUN rm -f .installed.cfg .mr.developer.cfg
+  && pip install -U pip \
+  && pip install -r requirements.txt \
+  && rm -f .installed.cfg .mr.developer.cfg
+
 USER imio
-RUN pip install -r requirements.txt \
-  && buildout -vvv -c prod.cfg
+RUN buildout -vvv -c prod.cfg
 
 
 FROM docker-staging.imio.be/base:alpinepy3
@@ -37,7 +41,9 @@ ENV PLONE_MAJOR=5.2 \
   PLONE_VERSION=5.2.3 \
   TZ=Europe/Brussel
 
-RUN mkdir /data && chown imio:imio -R /data
+RUN mkdir /data \
+  && chown imio:imio -R /data
+
 VOLUME /data/blobstorage
 VOLUME /data/filestorage
 WORKDIR /plone
