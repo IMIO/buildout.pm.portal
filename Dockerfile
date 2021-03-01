@@ -22,7 +22,7 @@ RUN apk add --update --no-cache --virtual .build-deps \
   && chown imio:imio -R /plone \
   && chown imio:imio -R /data
 WORKDIR /plone
-COPY --chown=imio eggs /plone/eggs/
+# COPY --chown=imio eggs /plone/eggs/
 COPY --chown=imio scripts /plone/scripts/
 COPY --chown=imio *.cfg requirements.txt /plone/
 RUN rm -f .installed.cfg .mr.developer.cfg
