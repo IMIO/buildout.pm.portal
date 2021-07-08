@@ -1,12 +1,5 @@
-FROM docker-staging.imio.be/base:alpinepy3 as builder
-ENV PLONE_MAJOR=5.2 \
-  PLONE_VERSION=5.2.3
+FROM imiobe/plone-base:5.2.4-alpine as builder
 
-RUN mkdir -p /plone /data \
-  && chown imio:imio -R /plone \
-  && chown imio:imio -R /data
-
-# COPY --chown=imio eggs /plone/eggs/
 COPY --chown=imio scripts /plone/scripts/
 COPY --chown=imio *.cfg requirements.txt /plone/
 
@@ -27,55 +20,38 @@ RUN apk add --update --no-cache --virtual .build-deps \
   pcre-dev \
   wget \
   zlib-dev \
-  && pip install -U pip \
   && pip install -r requirements.txt \
-  && rm -f .installed.cfg .mr.developer.cfg
+  && su -c "buildout -vvv -c prod.cfg" -s /bin/sh imio
 
-USER imio
-RUN buildout -vvv -c prod.cfg
-
-
-FROM docker-staging.imio.be/base:alpinepy3
+FROM imiobe/plone-base:5.2.4-alpine
 
 ENV PLONE_MAJOR=5.2 \
-  PLONE_VERSION=5.2.3 \
-  TZ=Europe/Brussel
-
-RUN mkdir /data \
-  && chown imio:imio -R /data
-
-VOLUME /data/blobstorage
-VOLUME /data/filestorage
-WORKDIR /plone
-
-RUN apk add --no-cache --virtual .run-deps \
-  bash \
-  rsync \
-  libxml2 \
-  libxslt \
-  libpng \
-  libjpeg-turbo
+  PLONE_VERSION=5.2.4 \
+  TZ=Europe/Brussel \
+  ZEO_HOST=db \
+  ZEO_PORT=8100 \
+  HOSTNAME_HOST=local \
+  PROJECT_ID=imio \
+  SMTP_QUEUE_DIRECTORY=/data/queue
 
 LABEL plone=$PLONE_VERSION \
   os="alpine" \
-  name="Plone 5.2.3" \
+  name="Plone $PLONE_VERSION" \
   description="Plone image for PM Citizen Portal" \
   maintainer="Imio"
 
-COPY --from=builder /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
-COPY --chown=imio --from=builder /plone .
-
+COPY --chown=imio --from=builder /plone /plone
 COPY --chown=imio docker-initialize.py docker-entrypoint.sh /
+
+RUN pip install -r requirements.txt
+
 USER imio
+VOLUME /data/blobstorage
+VOLUME /data/filestorage
+WORKDIR /plone
 EXPOSE 8081
 HEALTHCHECK --interval=1m --timeout=5s --start-period=45s \
   CMD nc -z -w5 127.0.0.1 8081 || exit 1
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["start"]
-
-ENV ZEO_HOST=db \
- ZEO_PORT=8100 \
- HOSTNAME_HOST=local \
- PROJECT_ID=imio \
- SMTP_QUEUE_DIRECTORY=/data/queue

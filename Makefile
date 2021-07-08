@@ -39,12 +39,4 @@ bootstrap:
 
 .PHONY: docker-image
 docker-image:
-	make eggs
 	docker build --no-cache --pull -t iadelib/citizenportal:latest .
-
-.PHONY: eggs
-eggs:  ## Copy eggs from docker image to speed up docker build
-	rm -Rf eggs
-	mkdir -p eggs
-	docker pull $(IMAGE_NAME)
-	docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
