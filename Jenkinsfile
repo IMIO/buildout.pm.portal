@@ -29,8 +29,8 @@ pipeline {
                 }
             }
             steps {
-                sh "mco shell run 'docker pull docker-staging.imio.be/iadelib/citizenportal:$BUILD_ID' -I /^staging.imio.be/"
-                sh "mco shell run 'systemctl restart website-conseil.service' -t 1200 --tail -I /^staging.imio.be/"
+                sh "mco shell run 'docker pull docker-staging.imio.be/iadelib/citizenportal:$BUILD_ID' -I /^pm-staging.imio.be/"
+                sh "mco shell run 'systemctl restart website-conseil.service' -t 1200 --tail -I /^pm-staging.imio.be/"
             }
         }
         stage('Deploy to prod ?') {
