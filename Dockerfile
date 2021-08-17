@@ -1,4 +1,4 @@
-FROM imiobe/plone-base:5.2.4-alpine as builder
+FROM imiobe/plone-base:5.2.5-alpine as builder
 
 COPY --chown=imio scripts /plone/scripts/
 COPY --chown=imio *.cfg requirements.txt /plone/
