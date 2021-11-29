@@ -23,10 +23,10 @@ RUN apk add --update --no-cache --virtual .build-deps \
   && pip install -r requirements.txt \
   && su -c "buildout -vvv -c prod.cfg" -s /bin/sh imio
 
-FROM imiobe/plone-base:5.2.4-alpine
+FROM imiobe/plone-base:5.2.6-alpine
 
 ENV PLONE_MAJOR=5.2 \
-  PLONE_VERSION=5.2.4 \
+  PLONE_VERSION=5.2.6 \
   TZ=Europe/Brussel \
   ZEO_HOST=db \
   ZEO_PORT=8100 \
