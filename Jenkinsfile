@@ -54,9 +54,8 @@ pipeline {
         stage('Deploying to prod') {
             agent any
             steps {
-                sh "docker pull docker-staging.imio.be/iadelib/citizenportal:$BUILD_ID"
-                sh "docker tag docker-staging.imio.be/iadelib/citizenportal:$BUILD_ID docker-prod.imio.be/iadelib/citizenportal:$BUILD_ID"
-                sh "docker tag docker-staging.imio.be/iadelib/citizenportal:$BUILD_ID docker-prod.imio.be/iadelib/citizenportal:latest"
+                sh "docker pull docker-staging.imio.be/iadelib/citizenportal:latest-$BUILD_ID"
+                sh "docker tag docker-staging.imio.be/iadelib/citizenportal:latest-$BUILD_ID docker-prod.imio.be/iadelib/citizenportal:latest"
                 sh "docker push docker-prod.imio.be/iadelib/citizenportal:latest"
                 sh "mco shell run 'docker pull docker-prod.imio.be/iadelib/citizenportal:latest' -I /^pm-prod19.imio.be/"
                 sh "mco shell run 'systemctl restart website-conseil.service' -t 1200 --tail -I /^pm-prod19.imio.be/"
