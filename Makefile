@@ -34,7 +34,7 @@ cleanall:
 
 .PHONY: bootstrap
 bootstrap:
-	virtualenv -p python3 .
+	virtualenv -p python3.8 .
 	bin/pip install -r requirements.txt
 
 .PHONY: docker-image

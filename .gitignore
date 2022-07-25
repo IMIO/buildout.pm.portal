@@ -17,6 +17,7 @@ report.html
 package-lock.json
 package.json
 Gruntfile.js
+pyvenv.cfg
 
 #dirs
 bin/
