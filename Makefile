@@ -6,7 +6,7 @@ all: dev
 dev:
 	make cleanall
 	ln -fs dev.cfg buildout.cfg
-	if ! test -f bin/buildout;then make bootstrap;fi
+	make bootstrap
 	bin/pip install -U pip
 	bin/pip install -r requirements.txt
 	bin/buildout
@@ -15,7 +15,7 @@ dev:
 prod:
 	make cleanall
 	ln -fs prod.cfg buildout.cfg
-	if ! test -f bin/buildout;then make bootstrap;fi
+	make bootstrap
 	bin/pip install -U pip
 	bin/pip install -r requirements.txt
 	bin/buildout
@@ -34,7 +34,7 @@ cleanall:
 
 .PHONY: bootstrap
 bootstrap:
-	virtualenv -p python3.8 .
+	python3.8 -m venv .
 	bin/pip install -r requirements.txt
 
 .PHONY: docker-image
