@@ -1,4 +1,4 @@
-FROM imiobe/plone-base:5.2.13-alpine as builder
+FROM imiobe/plone-base:5.2.9-alpine as builder
 
 COPY --chown=imio scripts /plone/scripts/
 COPY --chown=imio *.cfg requirements.txt /plone/
@@ -23,10 +23,10 @@ RUN apk add --update --no-cache --virtual .build-deps \
   && pip install -r requirements.txt \
   && su -c "buildout -vvv -c prod.cfg" -s /bin/sh imio
 
-FROM imiobe/plone-base:5.2.13-alpine
+FROM imiobe/plone-base:5.2.9-alpine
 
 ENV PLONE_MAJOR=5.2 \
-  PLONE_VERSION=5.2.13 \
+  PLONE_VERSION=5.2.9 \
   TZ=Europe/Brussel \
   ZEO_HOST=db \
   ZEO_PORT=8100 \
