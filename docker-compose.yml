@@ -1,4 +1,4 @@
-version: '3.4'
+version: '2.4'
 volumes:
   delib-postgres:
 services:
@@ -7,18 +7,26 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./data/blobstorage:/data/blobstorage
       - ./zodbconvert.cfg:/plone/zodbconvert.cfg
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
     environment:
       - ENV=dev
       - DOMAINS=localhost
-      - ZEO_HOST=zeo
-      - ZEO_PORT=8100
-    command: fg
+      - RELSTORAGE_DB=zope
+      - RELSTORAGE_USER=zope
+      - RELSTORAGE_PASSWORD=zope
+      - RELSTORAGE_HOSTNAME=postgres
+      - RELSTORAGE_PORT=5432
+      - PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default
+      - DEFAULT_LANGUAGE=fr
+      - ACTIVE_BIGBANG=True
+      - SITE_ID=conseil
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.instance.rule=Host(`portal.localhost`)"
-      - "traefik.http.routers.instance.entrypoints=web"
       - "traefik.http.services.instance.loadbalancer.server.port=8081"
       - "traefik.http.routers.instance.middlewares=add-plone"
       - "traefik.http.middlewares.add-plone.addprefix.prefix=/VirtualHostBase/http/portal.localhost/conseil/VirtualHostRoot"
@@ -30,15 +38,11 @@ services:
       - POSTGRES_PASSWORD=zope
     volumes:
       - delib-postgres:/var/lib/postgresql/data
-  reverseproxy:
-    image: traefik:2.0 # The official Traefik docker image
-          #- "--log.level=DEBUG"
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--entryPoints.web.address=:80"
+  reverse-proxy:
+    image: traefik:v2.4
+    command: --api.insecure=true --providers.docker
     ports:
-      - "80:80"     # The HTTP port
-      - "8000:8080" # The Web UI (enabled by --api)
+      - "80:80" # The HTTP port
+      - "8001:8080" # The Web UI (enabled by --api)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
