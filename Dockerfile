@@ -37,6 +37,7 @@ WORKDIR /plone
 COPY --chown=imio *.cfg /plone/
 COPY --chown=imio scripts /plone/scripts
 
+RUN su -c "mkdir src" -s /bin/sh imio && su -c "git clone https://github.com/IMIO/plonemeeting.portal.core.git -b plone6 src/plonemeeting.portal.core" -s /bin/sh imio
 RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
 
 FROM harbor.imio.be/common/plone-base:6.0.9
