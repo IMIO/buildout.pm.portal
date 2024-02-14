@@ -80,9 +80,9 @@ COPY --from=builder /usr/local/lib/python3.10/dist-packages /usr/local/lib/pytho
 COPY --chown=imio docker-initialize.py docker-entrypoint.sh /
 
 USER imio
-EXPOSE 8080
+EXPOSE 8081
 HEALTHCHECK --interval=15s --timeout=10s --start-period=20s --retries=5 \
-  CMD wget -q http://127.0.0.1:8080/ok -O - | grep OK || exit 1
+  CMD wget -q http://127.0.0.1:8081/ok -O - | grep OK || exit 1
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["console"]
