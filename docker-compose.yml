@@ -3,13 +3,13 @@ volumes:
   delib-postgres:
 services:
   instance:
-    image: iadelib/citizenportal:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ./data/blobstorage:/data/blobstorage
       - ./zodbconvert.cfg:/plone/zodbconvert.cfg
     environment:
-      - MEMCACHE_SERVER=172.17.0.1
-      - MEMCACHE_DEFAULT_AGE=10800
       - ENV=dev
       - DOMAINS=localhost
       - ZEO_HOST=zeo
