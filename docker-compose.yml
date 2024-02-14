@@ -1,25 +1,16 @@
 version: '3.4'
+volumes:
+  delib-postgres:
 services:
-  zeo:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: iadelib/citizenportal:latest
-    volumes:
-      - ./data/blobstorage:/data/blobstorage
-      - ./data/filestorage:/data/filestorage
-    healthcheck:
-      test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8100']
-    command: zeoserver fg
   instance:
     image: iadelib/citizenportal:latest
     volumes:
       - ./data/blobstorage:/data/blobstorage
+      - ./zodbconvert.cfg:/plone/zodbconvert.cfg
     environment:
       - MEMCACHE_SERVER=172.17.0.1
       - MEMCACHE_DEFAULT_AGE=10800
       - ENV=dev
-      - CACHING_SERVERS=http://frontend2.lan.imio.be:5000 http://frontend3.lan.imio.be:5000
       - DOMAINS=localhost
       - ZEO_HOST=zeo
       - ZEO_PORT=8100
@@ -31,6 +22,14 @@ services:
       - "traefik.http.services.instance.loadbalancer.server.port=8081"
       - "traefik.http.routers.instance.middlewares=add-plone"
       - "traefik.http.middlewares.add-plone.addprefix.prefix=/VirtualHostBase/http/portal.localhost/conseil/VirtualHostRoot"
+  postgres:
+    image: postgres:14.2
+    environment:
+      - POSTGRES_DB=zope
+      - POSTGRES_USER=zope
+      - POSTGRES_PASSWORD=zope
+    volumes:
+      - delib-postgres:/var/lib/postgresql/data
   reverseproxy:
     image: traefik:2.0 # The official Traefik docker image
           #- "--log.level=DEBUG"
