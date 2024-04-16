@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build latest
-        uses: IMIO/buildout.pm.portal/actions/harbor@add-gh-actions
+        uses: IMIO/buildout.pm.portal/actions/harbor@plone6
         with:
           HARBOR_URL: ${{ secrets.HARBOR_URL }}
           DELIB_HARBOR_USERNAME: ${{ secrets.DELIB_HARBOR_USERNAME }}
