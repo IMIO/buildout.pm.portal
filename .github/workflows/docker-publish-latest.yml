@@ -4,12 +4,15 @@ on:
   push:
 env:
   IMAGE_NAME: delib/deliberationsbe
+  BUILD_NUMBER: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
 
 jobs:
   docker:
     runs-on:
       group: self-hosted
     steps:
+      - name: Output build number
+        run: echo ${{ env.BUILD_NUMBER }}
       - name: Build, push image and notify
         uses: IMIO/gha/build-push-notify@v3.1
         with:
@@ -22,4 +25,4 @@ jobs:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
           CONTEXT: '.'
           DOCKERFILE: 'Dockerfile'
-          BUILD_ARGS: ''
+          BUILD_ARGS: 'build_number=${{ env.BUILD_NUMBER }}'

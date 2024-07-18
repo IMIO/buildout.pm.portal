@@ -40,6 +40,7 @@ COPY --chown=imio scripts /plone/scripts
 RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
 
 FROM harbor.imio.be/common/plone-base:6.0.9
+ARG build_number
 ENV PIP=23.3.1 \
   ZC_BUILDOUT=3.0.1 \
   SETUPTOOLS=69.0.2 \
@@ -77,6 +78,7 @@ COPY --from=builder /usr/local/bin/py-spy /usr/local/bin/py-spy
 COPY --chown=imio --from=builder /plone .
 COPY --from=builder /usr/local/lib/python3.10/dist-packages /usr/local/lib/python3.10/dist-packages
 COPY --chown=imio docker-initialize.py docker-entrypoint.sh /
+RUN echo $build_number > .build_number
 
 USER imio
 EXPOSE 8081
