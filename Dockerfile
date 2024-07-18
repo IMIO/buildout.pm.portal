@@ -1,4 +1,5 @@
-FROM harbor.imio.be/common/plone-base:6.0.9 as builder
+FROM harbor.imio.be/common/plone-base:6.0.11.1 AS builder
+
 ENV PIP=23.3.1 \
   ZC_BUILDOUT=3.0.1 \
   SETUPTOOLS=69.0.2 \
@@ -39,7 +40,7 @@ COPY --chown=imio scripts /plone/scripts
 
 RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
 
-FROM harbor.imio.be/common/plone-base:6.0.9
+FROM harbor.imio.be/common/plone-base:6.0.11.1
 ARG build_number
 ENV PIP=23.3.1 \
   ZC_BUILDOUT=3.0.1 \
