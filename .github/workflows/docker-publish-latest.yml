@@ -1,0 +1,25 @@
+name: Publish latest image
+on:
+  workflow_dispatch:
+  push:
+env:
+  IMAGE_NAME: delib/deliberationsbe
+
+jobs:
+  docker:
+    runs-on:
+      group: self-hosted
+    steps:
+      - name: Build, push image and notify
+        uses: IMIO/gha/build-push-notify@v3.1
+        with:
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_TAGS: |
+            ${{ secrets.HARBOR_URL }}/${{ env.IMAGE_NAME }}:latest
+          REGISTRY_URL: ${{ secrets.HARBOR_URL }}
+          REGISTRY_USERNAME: ${{ secrets.DELIB_HARBOR_USERNAME }}
+          REGISTRY_PASSWORD: ${{ secrets.DELIB_HARBOR_PASSWORD }}
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
+          CONTEXT: '.'
+          DOCKERFILE: 'Dockerfile'
+          BUILD_ARGS: ''
