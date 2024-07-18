@@ -5,6 +5,7 @@ on:
     tag:
 env:
   IMAGE_NAME: delib/deliberationsbe
+  BUILD_NUMBER: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
 
 jobs:
   docker:
@@ -30,4 +31,4 @@ jobs:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
           CONTEXT: '.'
           DOCKERFILE: 'Dockerfile'
-          BUILD_ARGS: ''
+          BUILD_ARGS: 'build_number=${{ env.BUILD_NUMBER }}'
