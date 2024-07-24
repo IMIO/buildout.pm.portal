@@ -1,8 +1,10 @@
 name: Publish release image
 on:
   workflow_dispatch:
-  create:
-    tag:
+  push:
+    tags:
+      - '**'
+
 env:
   IMAGE_NAME: delib/deliberationsbe
   BUILD_NUMBER: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
@@ -12,14 +14,8 @@ jobs:
     runs-on:
       group: self-hosted
     steps:
-      - name: Login to Harbor
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ secrets.HARBOR_URL }}
-          username: ${{ secrets.DELIB_HARBOR_USERNAME }}
-          password: ${{ secrets.DELIB_HARBOR_PASSWORD }}
       - name: Build, push image and notify
-        uses: IMIO/gha/build-push-notify@v3.1
+        uses: IMIO/gha/build-push-notify@v3.3
         with:
           IMAGE_NAME: ${{ env.IMAGE_NAME }}
           IMAGE_TAGS: |

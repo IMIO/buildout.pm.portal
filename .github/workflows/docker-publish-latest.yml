@@ -14,7 +14,7 @@ jobs:
       - name: Output build number
         run: echo ${{ env.BUILD_NUMBER }}
       - name: Build, push image and notify
-        uses: IMIO/gha/build-push-notify@v3.1
+        uses: IMIO/gha/build-push-notify@v3.3
         with:
           IMAGE_NAME: ${{ env.IMAGE_NAME }}
           IMAGE_TAGS: |
