@@ -1,11 +1,11 @@
 FROM harbor.imio.be/common/plone-base:6.0.11.1 AS builder
 
-ENV PIP=23.3.1 \
+ENV PIP=24 \
   ZC_BUILDOUT=3.0.1 \
-  SETUPTOOLS=69.0.2 \
-  WHEEL=0.42.0 \
+  SETUPTOOLS=69.5.1 \
+  WHEEL=0.43.0 \
   PLONE_MAJOR=6.0 \
-  PLONE_VERSION=6.0.9
+  PLONE_VERSION=6.0.11.1
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-pip \
   wget \
   zlib1g-dev \
-  && pip3 install --no-cache-dir pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT py-spy
+  && pip3 install --no-cache-dir --break-system-packages pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT py-spy
 
 WORKDIR /plone
 # RUN chown imio:imio -R /plone && mkdir /data && chown imio:imio -R /data
@@ -42,12 +42,11 @@ RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
 
 FROM harbor.imio.be/common/plone-base:6.0.11.1
 ARG build_number
-ENV PIP=23.3.1 \
+ENV PIP=24.0 \
   ZC_BUILDOUT=3.0.1 \
-  SETUPTOOLS=69.0.2 \
-  WHEEL=0.42.0 \
-  PLONE_MAJOR=6.0 \
-  PLONE_VERSION=6.0.9 \
+  SETUPTOOLS=69.5.1 \
+  WHEEL=0.43.0 \
+  PLONE_VERSION=6.0.11.1 \
   HOSTNAME_HOST=local \
   PROJECT_ID=delib \
   PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default \
@@ -62,13 +61,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libmemcached11 \
   libopenjp2-7 \
   libpq5 \
-  libtiff5 \
+  libtiff6 \
   libxml2 \
   libxslt1.1 \
   lynx \
-  netcat \
+  netcat-openbsd \
   poppler-utils \
-  python3-distutils \
   rsync \
   wget \
   wv \
@@ -77,7 +75,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl -L https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_amd64.deb > /tmp/dumb-init.deb && dpkg -i /tmp/dumb-init.deb && rm /tmp/dumb-init.deb
 COPY --from=builder /usr/local/bin/py-spy /usr/local/bin/py-spy
 COPY --chown=imio --from=builder /plone .
-COPY --from=builder /usr/local/lib/python3.10/dist-packages /usr/local/lib/python3.10/dist-packages
+COPY --from=builder /usr/local/lib/python3.12/dist-packages /usr/local/lib/python3.12/dist-packages
 COPY --chown=imio docker-initialize.py docker-entrypoint.sh /
 RUN echo $build_number > .build_number
 
