@@ -1,0 +1,30 @@
+name: Publish release image
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '**'
+
+env:
+  IMAGE_NAME: delib/deliberationsbe
+  BUILD_NUMBER: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
+
+jobs:
+  docker:
+    runs-on:
+      group: self-hosted
+    steps:
+      - name: Build, push image and notify
+        uses: IMIO/gha/build-push-notify@v3.3
+        with:
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_TAGS: |
+            ${{ secrets.HARBOR_URL }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
+            ${{ secrets.HARBOR_URL }}/${{ env.IMAGE_NAME }}:latest
+          REGISTRY_URL: ${{ secrets.HARBOR_URL }}
+          REGISTRY_USERNAME: ${{ secrets.DELIB_HARBOR_USERNAME }}
+          REGISTRY_PASSWORD: ${{ secrets.DELIB_HARBOR_PASSWORD }}
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
+          CONTEXT: '.'
+          DOCKERFILE: 'Dockerfile'
+          BUILD_ARGS: 'build_number=${{ env.BUILD_NUMBER }}'

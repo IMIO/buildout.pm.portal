@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/usr/bin/dumb-init /bin/bash
 set -e
 COMMANDS="debug help logtail show stop adduser fg kill quit run wait console foreground logreopen reload shell status"
 START="start restart zeoserver"
 CMD="bin/instance"
 
-python /docker-initialize.py
+python3 /docker-initialize.py
 mkdir -p /data/{log,filestorage,blobstorage}
 if [ -e "custom.cfg" ]; then
 	if [ ! -e "bin/develop" ]; then
 		buildout -c custom.cfg
-		python /docker-initialize.py
+		python3 /docker-initialize.py
 	fi
 fi
 

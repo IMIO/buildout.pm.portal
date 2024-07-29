@@ -1,57 +1,88 @@
-FROM imiobe/plone-base:5.2.9-alpine as builder
+FROM harbor.imio.be/common/plone-base:6.0.11.1 AS builder
 
-COPY --chown=imio scripts /plone/scripts/
-COPY --chown=imio *.cfg requirements.txt /plone/
+ENV PIP=24 \
+  ZC_BUILDOUT=3.0.1 \
+  SETUPTOOLS=69.5.1 \
+  WHEEL=0.43.0 \
+  PLONE_MAJOR=6.0 \
+  PLONE_VERSION=6.0.11.1
 
-WORKDIR /plone
-
-RUN apk add --update --no-cache --virtual .build-deps \
-  build-base \
+# hadolint ignore=DL3008
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  build-essential \
   gcc \
   git \
-  libc-dev \
+  libbz2-dev \
+  libc6-dev \
   libffi-dev \
-  libjpeg-turbo-dev \
-  libpng-dev \
-  libwebp-dev \
+  libjpeg62-dev \
+  libopenjp2-7-dev \
+  libmemcached-dev \
+  libpcre3-dev \
+  libpq-dev \
+  libreadline-dev \
+  libssl-dev \
   libxml2-dev \
-  libxslt-dev \
-  openssl-dev \
-  pcre-dev \
+  libxslt1-dev \
+  python3-dev \
+  python3-pip \
   wget \
-  zlib-dev \
-  && pip install -r requirements.txt \
-  && su -c "buildout -vvv -c prod.cfg" -s /bin/sh imio
+  zlib1g-dev \
+  && pip3 install --no-cache-dir --break-system-packages pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT py-spy
 
-FROM imiobe/plone-base:5.2.9-alpine
+WORKDIR /plone
+# RUN chown imio:imio -R /plone && mkdir /data && chown imio:imio -R /data
 
-ENV PLONE_MAJOR=5.2 \
-  PLONE_VERSION=5.2.9 \
-  TZ=Europe/Brussel \
-  ZEO_HOST=db \
-  ZEO_PORT=8100 \
+# COPY --chown=imio eggs /plone/eggs/
+# COPY --chown=imio --from=harbor.imio.be/delib/portal:latest /plone/eggs/ /plone/eggs/
+COPY --chown=imio *.cfg /plone/
+COPY --chown=imio scripts /plone/scripts
+
+RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
+
+FROM harbor.imio.be/common/plone-base:6.0.11.1
+ARG build_number
+ENV PIP=24.0 \
+  ZC_BUILDOUT=3.0.1 \
+  SETUPTOOLS=69.5.1 \
+  WHEEL=0.43.0 \
+  PLONE_VERSION=6.0.11.1 \
   HOSTNAME_HOST=local \
-  PROJECT_ID=imio \
-  SMTP_QUEUE_DIRECTORY=/data/queue
+  PROJECT_ID=delib \
+  PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default \
+  DEFAULT_LANGUAGE=fr
 
-LABEL plone=$PLONE_VERSION \
-  os="alpine" \
-  name="Plone $PLONE_VERSION" \
-  description="Plone image for PM Citizen Portal" \
-  maintainer="Imio"
+VOLUME /data/blobstorage
+WORKDIR /plone
 
-COPY --chown=imio --from=builder /plone /plone
+# hadolint ignore=DL3008
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  libjpeg62 \
+  libmemcached11 \
+  libopenjp2-7 \
+  libpq5 \
+  libtiff6 \
+  libxml2 \
+  libxslt1.1 \
+  lynx \
+  netcat-openbsd \
+  poppler-utils \
+  rsync \
+  wget \
+  wv \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+RUN curl -L https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_amd64.deb > /tmp/dumb-init.deb && dpkg -i /tmp/dumb-init.deb && rm /tmp/dumb-init.deb
+COPY --from=builder /usr/local/bin/py-spy /usr/local/bin/py-spy
+COPY --chown=imio --from=builder /plone .
+COPY --from=builder /usr/local/lib/python3.12/dist-packages /usr/local/lib/python3.12/dist-packages
 COPY --chown=imio docker-initialize.py docker-entrypoint.sh /
-
-RUN pip install -r requirements.txt
+RUN echo $build_number > .build_number
 
 USER imio
-VOLUME /data/blobstorage
-VOLUME /data/filestorage
-WORKDIR /plone
 EXPOSE 8081
-HEALTHCHECK --interval=1m --timeout=5s --start-period=45s \
-  CMD nc -z -w5 127.0.0.1 8081 || exit 1
+HEALTHCHECK --interval=15s --timeout=10s --start-period=20s --retries=5 \
+  CMD wget -q http://127.0.0.1:8081/ok -O - | grep OK || exit 1
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["start"]
+CMD ["console"]
