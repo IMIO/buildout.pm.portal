@@ -31,10 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && pip3 install --no-cache-dir --break-system-packages pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT py-spy
 
 WORKDIR /plone
-# RUN chown imio:imio -R /plone && mkdir /data && chown imio:imio -R /data
 
-# COPY --chown=imio eggs /plone/eggs/
-# COPY --chown=imio --from=harbor.imio.be/delib/portal:latest /plone/eggs/ /plone/eggs/
 COPY --chown=imio *.cfg /plone/
 COPY --chown=imio scripts /plone/scripts
 
