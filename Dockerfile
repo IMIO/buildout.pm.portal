@@ -35,7 +35,7 @@ WORKDIR /plone
 COPY --chown=imio *.cfg /plone/
 COPY --chown=imio scripts /plone/scripts
 
-RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
+RUN su -c "buildout -c docker.cfg -t 30 -N" -s /bin/sh imio
 
 FROM harbor.imio.be/common/plone-base:6.0.11.1
 ARG build_number

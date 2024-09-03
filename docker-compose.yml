@@ -2,47 +2,49 @@ version: '2.4'
 volumes:
   delib-postgres:
 services:
-  instance:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./zodbconvert.cfg:/plone/zodbconvert.cfg
-    ports:
-      - "8081:8081"
-    depends_on:
-      - postgres
-    environment:
-      - ENV=dev
-      - DOMAINS=localhost
-      - RELSTORAGE_DB=zope
-      - RELSTORAGE_USER=zope
-      - RELSTORAGE_PASSWORD=zope
-      - RELSTORAGE_HOSTNAME=postgres
-      - RELSTORAGE_PORT=5432
-      - PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default
-      - DEFAULT_LANGUAGE=fr
-      - ACTIVE_BIGBANG=True
-      - SITE_ID=conseil
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.instance.rule=Host(`portal.localhost`)"
-      - "traefik.http.services.instance.loadbalancer.server.port=8081"
-      - "traefik.http.routers.instance.middlewares=add-plone"
-      - "traefik.http.middlewares.add-plone.addprefix.prefix=/VirtualHostBase/http/portal.localhost/conseil/VirtualHostRoot"
+#  instance:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    volumes:
+#      - ./zodbconvert.cfg:/plone/zodbconvert.cfg
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - postgres
+#    environment:
+#      - ENV=dev
+#      - DOMAINS=localhost
+#      - RELSTORAGE_DB=zope
+#      - RELSTORAGE_USER=zope
+#      - RELSTORAGE_PASSWORD=zope
+#      - RELSTORAGE_HOSTNAME=postgres
+#      - RELSTORAGE_PORT=5432
+#      - PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default
+#      - DEFAULT_LANGUAGE=fr
+#      - ACTIVE_BIGBANG=True
+#      - SITE_ID=conseil
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.instance.rule=Host(`portal.localhost`)"
+#      - "traefik.http.services.instance.loadbalancer.server.port=8081"
+#      - "traefik.http.routers.instance.middlewares=add-plone"
+#      - "traefik.http.middlewares.add-plone.addprefix.prefix=/VirtualHostBase/http/portal.localhost/conseil/VirtualHostRoot"
   postgres:
-    image: postgres:14.2
+    image: postgres:16.4
+    ports:
+      - "5432:5432"
     environment:
-      - POSTGRES_DB=zope
+      - POSTGRES_DB=plone
       - POSTGRES_USER=zope
       - POSTGRES_PASSWORD=zope
     volumes:
       - delib-postgres:/var/lib/postgresql/data
-  reverse-proxy:
-    image: traefik:v2.4
-    command: --api.insecure=true --providers.docker
-    ports:
-      - "80:80" # The HTTP port
-      - "8001:8080" # The Web UI (enabled by --api)
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+#  reverse-proxy:
+#    image: traefik:v2.4
+#    command: --api.insecure=true --providers.docker
+#    ports:
+#      - "80:80" # The HTTP port
+#      - "8001:8080" # The Web UI (enabled by --api)
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
