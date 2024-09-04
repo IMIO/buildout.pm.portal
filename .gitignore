@@ -8,7 +8,6 @@
 *.sublime-project
 .mr.developer.cfg
 .installed.cfg
-buildout.cfg
 lib64
 log.html
 output.xml
