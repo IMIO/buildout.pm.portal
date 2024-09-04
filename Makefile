@@ -2,19 +2,9 @@ IMAGE_NAME="docker-staging.imio.be/iadelib/citizenportal:latest"
 
 all: dev
 
-.PHONY: dev
-dev:
+.PHONY: buildout
+buildout:
 	make cleanall
-	ln -fs dev.cfg buildout.cfg
-	make bootstrap
-	bin/pip install -U pip
-	bin/pip install -r requirements.txt
-	bin/buildout
-
-.PHONY: prod
-prod:
-	make cleanall
-	ln -fs prod.cfg buildout.cfg
 	make bootstrap
 	bin/pip install -U pip
 	bin/pip install -r requirements.txt
@@ -34,7 +24,7 @@ cleanall:
 
 .PHONY: bootstrap
 bootstrap:
-	python3.8 -m venv .
+	python3.12 -m venv .
 	bin/pip install -r requirements.txt
 
 .PHONY: docker-image
