@@ -1,37 +1,59 @@
-version: '2.4'
 volumes:
   delib-postgres:
 services:
-#  instance:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    volumes:
-#      - ./zodbconvert.cfg:/plone/zodbconvert.cfg
-#    ports:
-#      - "8081:8081"
-#    depends_on:
-#      - postgres
-#    environment:
-#      - ENV=dev
-#      - DOMAINS=localhost
-#      - RELSTORAGE_DB=zope
-#      - RELSTORAGE_USER=zope
-#      - RELSTORAGE_PASSWORD=zope
-#      - RELSTORAGE_HOSTNAME=postgres
-#      - RELSTORAGE_PORT=5432
-#      - PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default
-#      - DEFAULT_LANGUAGE=fr
-#      - ACTIVE_BIGBANG=True
-#      - SITE_ID=conseil
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.instance.rule=Host(`portal.localhost`)"
-#      - "traefik.http.services.instance.loadbalancer.server.port=8081"
-#      - "traefik.http.routers.instance.middlewares=add-plone"
-#      - "traefik.http.middlewares.add-plone.addprefix.prefix=/VirtualHostBase/http/portal.localhost/conseil/VirtualHostRoot"
+  zeo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: pm-portal-zeo
+    # user: "1000:913"
+    volumes:
+      - ./var:/data
+    command: bin/zeoserver fg
+    healthcheck:
+      test: [ 'CMD', 'nc', '-z', '-w5', '127.0.0.1', '8100' ]
+    labels:
+      - "SERVICE_NAME=website-conseil"
+      - "SERVICE_TAGS=db"
+      - "SERVICE_8100_CHECK_TCP=true"
+      - "SERVICE_8100_CHECK_INTERVAL=300s"
+      - "SERVICE_8100_CHECK_TIMEOUT=8s"
+  instance:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: pm-portal-instance
+    # user: "1000:913"
+    volumes:
+      - ./var:/data
+      - ./zodbconvert.cfg:/plone/zodbconvert.cfg
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+      - zeo
+    links:
+      - zeo:db
+    environment:
+      - ENV=dev
+      - HOSTNAME_HOST=localhost
+      - ADMIN_PASSWORD=admin
+      - HTTP_PORT=8081
+      - ZEO_HOST=db
+      - ZEO_PORT=8100
+      - RELSTORAGE_DB=zope
+      - RELSTORAGE_USER=zope
+      - RELSTORAGE_PASSWORD=zope
+      - RELSTORAGE_HOSTNAME=postgres
+      - RELSTORAGE_PORT=5432
+      - PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default
+      - DEFAULT_LANGUAGE=fr
+      - ACTIVE_BIGBANG=True
+      - SITE_ID=conseil
+      - CRON=True
   postgres:
     image: postgres:16.4
+    hostname: pm-portal-postgres
     ports:
       - "5432:5432"
     environment:
@@ -40,11 +62,3 @@ services:
       - POSTGRES_PASSWORD=zope
     volumes:
       - delib-postgres:/var/lib/postgresql/data
-#  reverse-proxy:
-#    image: traefik:v2.4
-#    command: --api.insecure=true --providers.docker
-#    ports:
-#      - "80:80" # The HTTP port
-#      - "8001:8080" # The Web UI (enabled by --api)
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events

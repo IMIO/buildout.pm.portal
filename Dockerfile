@@ -54,6 +54,7 @@ WORKDIR /plone
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
+  cron \
   libjpeg62 \
   libmemcached11 \
   libopenjp2-7 \
@@ -74,6 +75,12 @@ COPY --from=builder /usr/local/bin/py-spy /usr/local/bin/py-spy
 COPY --chown=imio --from=builder /plone .
 COPY --from=builder /usr/local/lib/python3.12/dist-packages /usr/local/lib/python3.12/dist-packages
 COPY --chown=imio docker-initialize.py docker-entrypoint.sh /
+
+# Allow imio to create a cron job
+RUN touch /etc/cron.d/plone-tick \
+    && crontab -u imio /etc/cron.d/plone-tick \
+    && chmod u+s /usr/sbin/cron
+
 RUN echo $build_number > .build_number
 
 USER imio

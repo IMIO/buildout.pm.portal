@@ -6,6 +6,15 @@ CMD="bin/instance"
 
 python3 /docker-initialize.py
 mkdir -p /data/{log,filestorage,blobstorage}
+
+if [ "$CRON" = "True" ]; then
+  echo "Setting up the cron task"
+  echo -e "machine localhost\nlogin admin\npassword $ADMIN_PASSWORD" > ./.netrc
+  chmod 600 ./.netrc
+  service cron start
+  (crontab -u imio -l 2>/dev/null ; echo "*/15 * * * * curl -s --netrc-file /plone/.netrc http://localhost:8081/$SITE_ID/@@tick_fifteen") | crontab -
+fi
+
 if [ -e "custom.cfg" ]; then
 	if [ ! -e "bin/develop" ]; then
 		buildout -c custom.cfg
