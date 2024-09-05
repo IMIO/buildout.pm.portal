@@ -11,8 +11,9 @@ if [ "$CRON" = "True" ]; then
   echo "Setting up the cron task"
   echo -e "machine localhost\nlogin admin\npassword $ADMIN_PASSWORD" > ./.netrc
   chmod 600 ./.netrc
+  touch /data/log/cron.log
   service cron start
-  (crontab -u imio -l 2>/dev/null ; echo "*/15 * * * * curl -s --netrc-file /plone/.netrc http://localhost:8081/$SITE_ID/@@tick_fifteen") | crontab -
+  (crontab -u imio -l 2>/dev/null ; echo "*/15 * * * * curl -s --netrc-file /plone/.netrc http://localhost:8081/$SITE_ID/@@tick_fifteen >> /data/log/cron.log 2>&1 && echo '' >> /data/log/cron.log") | crontab -
 fi
 
 if [ -e "custom.cfg" ]; then
