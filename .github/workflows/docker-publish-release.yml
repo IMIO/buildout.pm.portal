@@ -13,11 +13,10 @@ env:
 
 jobs:
   docker:
-    runs-on:
-      group: self-hosted
+    runs-on: gha-runners-delib-py3
     steps:
       - name: Build, push image and notify
-        uses: IMIO/gha/build-push-notify@v3.3
+        uses: IMIO/gha/build-push-notify@v3.9.3
         with:
           IMAGE_NAME: ${{ env.IMAGE_NAME }}
           IMAGE_TAGS: |
