@@ -1,8 +1,8 @@
-FROM harbor.imio.be/common/plone-base:6.0.13 AS builder
+FROM harbor.imio.be/common/plone-base:6.1.0 AS builder
 
-ENV ZC_BUILDOUT=3.1.0 \
-  PLONE_MAJOR=6.0 \
-  PLONE_VERSION=6.0.11.1
+ENV ZC_BUILDOUT=4.1.4 \
+  PLONE_MAJOR=6.1 \
+  PLONE_VERSION=6.1.0
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -34,10 +34,10 @@ COPY --chown=imio scripts /plone/scripts
 
 RUN su -c "buildout -c docker.cfg -t 30 -N" -s /bin/sh imio
 
-FROM harbor.imio.be/common/plone-base:6.0.13
+FROM harbor.imio.be/common/plone-base:6.1.0
 ARG build_number
-ENV ZC_BUILDOUT=3.1.0 \
-  PLONE_VERSION=6.0.11.1 \
+ENV ZC_BUILDOUT=4.1.4 \
+  PLONE_VERSION=6.1.0 \
   HOSTNAME_HOST=local \
   PROJECT_ID=delib \
   PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default \
