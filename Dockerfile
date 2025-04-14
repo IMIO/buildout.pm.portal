@@ -1,11 +1,8 @@
-FROM harbor.imio.be/common/plone-base:6.0.11.1 AS builder
+FROM harbor.imio.be/common/plone-base:6.1.0 AS builder
 
-ENV PIP=24 \
-  ZC_BUILDOUT=3.0.1 \
-  SETUPTOOLS=69.5.1 \
-  WHEEL=0.43.0 \
-  PLONE_MAJOR=6.0 \
-  PLONE_VERSION=6.0.11.1
+ENV ZC_BUILDOUT=4.1.4 \
+  PLONE_MAJOR=6.1 \
+  PLONE_VERSION=6.1.0
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -28,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-pip \
   wget \
   zlib1g-dev \
-  && pip3 install --no-cache-dir --break-system-packages pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT py-spy
+  && pip3 install --no-cache-dir --break-system-packages zc.buildout==$ZC_BUILDOUT py-spy
 
 WORKDIR /plone
 
@@ -37,13 +34,10 @@ COPY --chown=imio scripts /plone/scripts
 
 RUN su -c "buildout -c docker.cfg -t 30 -N" -s /bin/sh imio
 
-FROM harbor.imio.be/common/plone-base:6.0.11.1
+FROM harbor.imio.be/common/plone-base:6.1.0
 ARG build_number
-ENV PIP=24.0 \
-  ZC_BUILDOUT=3.0.1 \
-  SETUPTOOLS=69.5.1 \
-  WHEEL=0.43.0 \
-  PLONE_VERSION=6.0.11.1 \
+ENV ZC_BUILDOUT=4.1.4 \
+  PLONE_VERSION=6.1.0 \
   HOSTNAME_HOST=local \
   PROJECT_ID=delib \
   PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default \
