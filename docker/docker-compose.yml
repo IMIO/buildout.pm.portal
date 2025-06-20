@@ -20,7 +20,7 @@ services:
       - "SERVICE_8100_CHECK_TIMEOUT=8s"
   instance:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     hostname: pm-portal-instance
     # user: "1000:913"

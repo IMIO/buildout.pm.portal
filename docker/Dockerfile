@@ -68,7 +68,7 @@ RUN curl -L https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init
 COPY --from=builder /usr/local/bin/py-spy /usr/local/bin/py-spy
 COPY --chown=imio --from=builder /plone .
 COPY --from=builder /usr/local/lib/python3.12/dist-packages /usr/local/lib/python3.12/dist-packages
-COPY --chown=imio docker-initialize.py docker-entrypoint.sh /
+COPY --chown=imio docker/docker-initialize.py docker/docker-entrypoint.sh docker/cron.sh docker/tick.sh /
 
 # Allow imio to create a cron job
 RUN touch /etc/cron.d/plone-tick \
