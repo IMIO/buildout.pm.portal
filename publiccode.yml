@@ -1,0 +1,318 @@
+publiccodeYmlVersion: "0.7"
+
+name: "délibérations.be"
+applicationSuite: "iA.Délib"
+url: "https://github.com/IMIO/buildout.pm.portal"
+landingURL: "https://github.com/IMIO/buildout.pm.portal"
+softwareVersion: "2.1.13"
+releaseDate: "2025-07-01"
+logo: ".github/img/logo.svg"
+
+platforms:
+  - web
+
+categories:
+  - regulations-and-directives
+  - communications
+  - document-management
+
+usedBy:
+  - Commune d'Aiseau-Presles
+  - Commune d'Amay
+  - Commune d'Anderlues
+  - Commune d'Anthisnes
+  - Commune d'Assesse
+  - Commune d'Attert
+  - Commune d'Aubel
+  - Commune d'Awans
+  - Commune d'Ellezelles
+  - Commune d'Engis
+  - Commune d'Erquelinnes
+  - Commune d'Estaimpuis
+  - Commune d'Estinnes
+  - Commune d'Incourt
+  - Commune d'Ittre
+  - Commune d'Ohey
+  - Commune d'Olne
+  - Commune d'Onhaye
+  - Commune d'Oreye
+  - Commune d'Oupeye
+  - Commune d'Écaussinnes
+  - Commune d'Éghezée
+  - Commune d'Érezée
+  - Commune d'Étalle
+  - Commune de Baelen
+  - Commune de Belleville
+  - Commune de Belœil
+  - Commune de Berloz
+  - Commune de Bertrix
+  - Commune de Beyne-Heusay
+  - Commune de Blegny
+  - Commune de Boussu
+  - Commune de Braine-l'Alleud
+  - Commune de Braine-le-Château
+  - Commune de Braives
+  - Commune de Brunehaut
+  - Commune de Celles
+  - Commune de Cerfontaine
+  - Commune de Chapelle-lez-Herlaimont
+  - Commune de Chastre
+  - Commune de Chaumont-Gistoux
+  - Commune de Clavier
+  - Commune de Colfontaine
+  - Commune de Comblain-au-Pont
+  - Commune de Courcelles
+  - Commune de Court-Saint-Étienne
+  - Commune de Dalhem
+  - Commune de Daverdisse
+  - Commune de Dison
+  - Commune de Doische
+  - Commune de Donceel
+  - Commune de Dour
+  - Commune de Faimes
+  - Commune de Farciennes
+  - Commune de Fauvillers
+  - Commune de Ferrières
+  - Commune de Fexhe-le-Haut-Clocher
+  - Commune de Florennes
+  - Commune de Flémalle
+  - Commune de Fléron
+  - Commune de Frasnes-lez-Anvaing
+  - Commune de Froidchapelle
+  - Commune de Geer
+  - Commune de Gerpinnes
+  - Commune de Grez-Doiceau
+  - Commune de Grâce-Hollogne
+  - Commune de Habay
+  - Commune de Hamoir
+  - Commune de Hamois
+  - Commune de Havelange
+  - Commune de Hensies
+  - Commune de Honnelles
+  - Commune de Houyet
+  - Commune de Hélécine
+  - Commune de Héron
+  - Commune de Jalhay
+  - Commune de Jemeppe-sur-Sambre
+  - Commune de Juprelle
+  - Commune de Jurbise
+  - Commune de La Bruyère
+  - Commune de La Hulpe
+  - Commune de Lasne
+  - Commune de Lens
+  - Commune de Les Bons Villers
+  - Commune de Libin
+  - Commune de Lierneux
+  - Commune de Lincent
+  - Commune de Léglise
+  - Commune de Manage
+  - Commune de Manhay
+  - Commune de Marchin
+  - Commune de Martelange
+  - Commune de Meix-devant-Virton
+  - Commune de Merbes-le-Château
+  - Commune de Mettet
+  - Commune de Momignies
+  - Commune de Mont-Saint-Guibert
+  - Commune de Mont-de-l'Enclus
+  - Commune de Montigny-le-Tilleul
+  - Commune de Morlanwelz
+  - Commune de Nandrin
+  - Commune de Nassogne
+  - Commune de Paliseul
+  - Commune de Pepinster
+  - Commune de Perwez
+  - Commune de Pont-à-Celles
+  - Commune de Quaregnon
+  - Commune de Quiévrain
+  - Commune de Quévy
+  - Commune de Ramillies
+  - Commune de Rebecq
+  - Commune de Remicourt
+  - Commune de Rendeux
+  - Commune de Rixensart
+  - Commune de Rouvroy
+  - Commune de Saint-Georges-sur-Meuse
+  - Commune de Saint-Léger
+  - Commune de Sainte-Ode
+  - Commune de Sambreville
+  - Commune de Seneffe
+  - Commune de Sivry-Rance
+  - Commune de Sombreffe
+  - Commune de Somme-Leuze
+  - Commune de Sprimont
+  - Commune de Stoumont
+  - Commune de Tellin
+  - Commune de Theux
+  - Commune de Thimister-Clermont
+  - Commune de Tinlot
+  - Commune de Trois-Ponts
+  - Commune de Villers-la-Ville
+  - Commune de Viroinval
+  - Commune de Vresse-sur-Semois
+  - Commune de Waimes
+  - Commune de Walhain
+  - Commune de Wanze
+  - Commune de Wasseiges
+  - Commune de Welkenraedt
+  - Commune de Wellin
+  - Commune de Yvoir
+  - Intercommunale IMIO
+  - Ville d'Andenne
+  - Ville d'Ans
+  - Ville d'Arlon
+  - Ville d'Ath
+  - Ville d'Enghien
+  - Ville d'Ottignies-Louvain-la-Neuve
+  - Ville de Bastogne
+  - Ville de Beaumont
+  - Ville de Beauraing
+  - Ville de Binche
+  - Ville de Bouillon
+  - Ville de Charleroi
+  - Ville de Chimay
+  - Ville de Chiny
+  - Ville de Chièvres
+  - Ville de Châtelet
+  - Ville de Ciney
+  - Ville de Comines-Warneton
+  - Ville de Couvin
+  - Ville de Dinant
+  - Ville de Durbuy
+  - Ville de Fleurus
+  - Ville de Florenville
+  - Ville de Fontaine-l'Évêque
+  - Ville de Gembloux
+  - Ville de Genappe
+  - Ville de Herstal
+  - Ville de Huy
+  - Ville de La Louvière
+  - Ville de La Roche-en-Ardenne
+  - Ville de Le Rœulx
+  - Ville de Lessines
+  - Ville de Libramont-Chevigny
+  - Ville de Limbourg
+  - Ville de Liège
+  - Ville de Malmedy
+  - Ville de Marche-en-Famenne
+  - Ville de Mons
+  - Ville de Mouscron
+  - Ville de Namur
+  - Ville de Nivelles
+  - Ville de Philippeville
+  - Ville de Péruwelz
+  - Ville de Rochefort
+  - Ville de Saint-Ghislain
+  - Ville de Saint-Hubert
+  - Ville de Seraing
+  - Ville de Soignies
+  - Ville de Stavelot
+  - Ville de Thuin
+  - Ville de Tournai
+  - Ville de Tubize
+  - Ville de Verviers
+  - Ville de Virton
+  - Ville de Walcourt
+  - Ville de Waremme
+  - Ville de Wavre
+  - Zone de police Boraine
+  - Zone de police d'Orneau - Mehaigne
+  - Zone de police de Bernissart/Péruwelz
+  - Zone de police de Binche - Anderlues - Lermes
+  - Zone de police des Hauts-Pays
+  - Zone de secours Hainaut-Centre
+
+developmentStatus: "stable"
+softwareType: "standalone/web"
+
+intendedAudience:
+  scope:
+    - local-authorities
+    - government
+  countries:
+    - be
+
+description:
+  en:
+    localisedName: "Deliberations.be"
+    shortDescription: "Citizen portal for consulting deliberations and official publications from Walloon local authorities"
+    longDescription: >-
+      Deliberations.be is a web application that allows citizens to consult official deliberations and publications
+      from local authorities in Wallonia (Belgium). It offers advanced search features and ensures compliance
+      with regional legislation. Built on the open-source Plone CMS, the platform guarantees reliability and flexibility.
+      It integrates with iA.Delib, a deliberation management system, to automate parts of the publication process
+      and streamline administrative workflows.
+    documentation: "https://docs.imio.be/iadelib/deliberations.be"
+    features:
+      - "Access to deliberations and official publications from local authorities"
+      - "Advanced search by keywords, dates, and categories"
+      - "Publication management with qualified eIDAS timestamps"
+      - "Integration with iA.Delib for deliberation workflow automation (https://github.com/IMIO/buildout.pm)"
+      - "Documents generation"
+      - "Multitenancy: users and roles management for each entity"
+      - "Multitenancy: customizable themes for each entity"
+    screenshots:
+      - ".github/img/screenshot_home.jpg"
+      - ".github/img/screenshot_meeting.jpg"
+      - ".github/img/screenshot_publication.jpg"
+      - ".github/img/screenshot_deliberation.jpg"
+    videos: [ ]
+    awards: [ ]
+
+  fr:
+    localisedName: "Delibérations.be"
+    shortDescription: "Portail citoyen pour la consultation des délibérations et des publications officielles des Pouvoirs locaux wallons"
+    longDescription: >-
+      Délibérations.be est une application web permettant aux citoyens de consulter les délibérations et publications officielles
+      des Pouvoirs locaux en Wallonie. Elle offre des fonctionnalités de recherche avancée et garantit la conformité
+      avec la législation régionale. Elle est basée sur le CMS open source Plone.
+      L'application s’intègre avec iA.Délib, un outil de gestion des délibérations, afin d’automatiser une partie du processus
+      de publication et d’optimiser les flux de travail administratifs.
+    documentation: "https://docs.imio.be/iadelib/deliberations.be"
+    features:
+      - "Consultation des délibérations et publications officielles"
+      - "Recherche avancée par mots-clés, dates, et catégories"
+      - "Gestion des publications avec horodatage qualifié eIDAS"
+      - "Intégration avec iA.Délib pour la gestion des délibérations (https://github.com/IMIO/buildout.pm)"
+      - "Génération de documents"
+      - "Multi-tenant : gestion des utilisateurs et des rôles par entité"
+      - "Multi-tenant : thème personnalisable pour chaque entité"
+    screenshots:
+      - ".github/img/screenshot_home.jpg"
+      - ".github/img/screenshot_meeting.jpg"
+      - ".github/img/screenshot_publication.jpg"
+      - ".github/img/screenshot_deliberation.jpg"
+    videos: [ ]
+    awards: [ ]
+
+legal:
+  license: "GPL-2.0"
+  mainCopyrightOwner: "iMio, scrl"
+  repoOwner: "iMio, scrl"
+
+maintenance:
+  type: "internal"
+  contacts:
+    - name: "Support iA.Delib"
+      email: "support-delib@imio.be"
+      affiliation: "iMio, scrl"
+      phone: "+32 81 586 113"
+    - name: "Antoine Duchêne"
+      email: "antoine.duchene@imio.be"
+      affiliation: "iMio, scrl"
+      phone: "+32 81 586 113"
+
+localisation:
+  localisationReady: true
+  availableLanguages:
+    - fr
+    - en (80% translated)
+
+dependsOn:
+  open:
+    - name: "Plone CMS"
+      versionMin: "6.1"
+    - name: "Python"
+      versionMin: "3.12"
+  proprietary: [ ]
+  hardware: [ ]
