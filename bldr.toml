@@ -1,0 +1,82 @@
+versions_file = "versions.cfg"
+
+[[packages]]
+name = "plonemeeting.portal.core"
+allow_prerelease = false
+
+[[packages]]
+name = "plonetheme.deliberations"
+allow_prerelease = false
+
+[[packages]]
+name = "collective.autopublishing"
+allow_prerelease = false
+
+[[packages]]
+name = "collective.documentgenerator"
+allow_prerelease = false
+
+[[packages]]
+name = "collective.timestamp"
+allow_prerelease = false
+
+[[packages]]
+name = "imio.webspellchecker"
+allow_prerelease = false
+
+[git]
+auto_push = false
+commit_template = "Use {packages}"
+
+[github]
+create_release = true
+tag_prefix = ""
+
+[changelog]
+enabled = true
+format = "markdown"
+include_in_commit = true
+output_file = "CHANGELOG.md"
+use_as_release_notes = true
+header_template = """
+## Release {version}
+
+**Date:** {date}
+"""
+package_template = "### {package} ({old_version} → {new_version})"
+changelog_files = [
+    "CHANGELOG.md",
+    "CHANGES.md",
+    "HISTORY.md",
+    "CHANGELOG.rst",
+    "CHANGES.rst",
+    "HISTORY.rst",
+    "CHANGELOG.txt",
+    "CHANGES.txt",
+    "HISTORY.txt",
+    "docs/CHANGELOG.md",
+    "docs/CHANGES.md",
+    "docs/changelog.md",
+    "docs/changes.md",
+    "docs/history.md",
+]
+github_branches = []
+
+[version]
+version_pattern = '''(?m)^version\s*=\s*["']?(\d+\.\d+\.\d+)["']?'''
+
+[version.levels]
+fix = "patch"
+feature = "minor"
+patch = "patch"
+breaking = "major"
+minor = "minor"
+hotfix = "patch"
+major = "major"
+
+[[metadata_files]]
+path = "publiccode.yml"
+format = "yaml"
+version_fields = ["softwareVersion"]
+date_fields = ["releaseDate"]
+include_in_commit = true
