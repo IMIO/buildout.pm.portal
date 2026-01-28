@@ -1,5 +1,24 @@
 # Changelog
 
+## Release 2.3.3
+
+**Date:** 2026-01-28
+
+
+### plonemeeting.portal.core (2.3.1 → 2.3.2)
+
+#### Version 2.3.2 (2026-01-28)
+
+- DELIBE-152: Improve i18n translations.
+  [aduchene]
+
+### plonetheme.deliberations (1.6 → 1.7)
+
+#### Version 1.7 (2026-01-28)
+
+- Minor changes regarding some z-index issues.
+  [aduchene]
+
 ## Release 2.3.2
 
 **Date:** 2026-01-19
