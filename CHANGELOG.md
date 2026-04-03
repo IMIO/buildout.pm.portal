@@ -1,5 +1,17 @@
 # Changelog
 
+## Release 2.4.1
+
+**Date:** 2026-04-03
+
+
+### plonemeeting.portal.core (2.4.0 → 2.4.1)
+
+#### Version 2.4.1 (2026-04-03)
+
+- Enable AI assistant on ``Item`` (Decision) content type in addition to ``Publication``.
+  [aduchene]
+
 ## Release 2.4.0
 
 **Date:** 2026-04-03
