@@ -1,5 +1,31 @@
 # Changelog
 
+## Release 2.4.0
+
+**Date:** 2026-04-03
+
+
+### plonemeeting.portal.core (2.3.2 → 2.4.0)
+
+#### Version 2.4.0 (2026-04-03)
+
+- Integrate ``imio.omnia.core``, ``imio.omnia.assistant`` and ``imio.omnia.tinymce`` as dependencies.
+  [aduchene]
+- Add ``enable_ai_assistant`` and ``ai_assistant_system_prompt`` fields to ``Institution`` (new AI fieldset).
+  [aduchene]
+- Implement ``AssistantAdapter``: assistant only available on ``Publication`` content type
+  when ``enable_ai_assistant`` is enabled on the institution.
+  [aduchene]
+- Implement ``OrganizationIDProvider``: resolves the organization ID from the institution
+  containing the current publication.
+  [aduchene]
+- Grant ``Anonymous`` role access to ``@@omnia-assistant-api`` so the assistant works
+  on public publication pages.
+  [aduchene]
+- Add upgrade step to 2400: installs the three omnia add-ons and re-imports ``typeinfo``
+  and ``rolemap``.
+  [aduchene]
+
 ## Release 2.3.3
 
 **Date:** 2026-01-28
