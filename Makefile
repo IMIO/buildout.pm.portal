@@ -1,4 +1,5 @@
 IMAGE_NAME="docker-staging.imio.be/iadelib/citizenportal:latest"
+BUILD_NUMBER ?= local
 
 all: dev
 
@@ -29,4 +30,4 @@ bootstrap:
 
 .PHONY: docker-image
 docker-image:
-	docker build --no-cache --pull -t iadelib/citizenportal:latest .
+	docker build --no-cache --pull -f docker/Dockerfile --build-arg build_number=$(BUILD_NUMBER) -t iadelib/citizenportal:latest .
