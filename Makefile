@@ -1,6 +1,9 @@
 IMAGE_NAME="docker-staging.imio.be/iadelib/citizenportal:latest"
 BUILD_NUMBER ?= local
 
+# plonemeeting.portal.core owns its linting/formatting via plone.meta (ruff).
+CORE_DIR = src/plonemeeting.portal.core
+
 all: dev
 
 .PHONY: buildout
@@ -18,6 +21,17 @@ test:dev
 .PHONY: run
 run:
 	bin/instance fg
+
+# Lint/format the core package without leaving the buildout root.
+# Delegates to the package's make targets, which run ruff & zpretty directly
+# (requires `ruff` & `zpretty` on PATH: `pipx install ruff zpretty`).
+.PHONY: lint
+lint:
+	$(MAKE) -C $(CORE_DIR) lint
+
+.PHONY: format
+format:
+	$(MAKE) -C $(CORE_DIR) format
 
 .PHONY: cleanall
 cleanall:
