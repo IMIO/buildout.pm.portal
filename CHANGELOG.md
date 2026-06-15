@@ -1,5 +1,17 @@
 # Changelog
 
+## Release 2.4.8
+
+**Date:** 2026-06-15
+
+
+### plonemeeting.portal.core (2.4.2 → 2.4.3)
+
+#### Version 2.4.3 (2026-06-15)
+
+- Fix typo.
+  [aduchene]
+
 ## Release 2.4.7
 
 **Date:** 2026-06-15
