@@ -1,5 +1,125 @@
 # Changelog
 
+## Release 2.4.7
+
+**Date:** 2026-06-15
+
+
+### plonemeeting.portal.core (2.4.1 → 2.4.2)
+
+#### Version 2.4.2 (2026-06-15)
+
+- Send the ``Last-Modified`` header again on the ``@@custom_colors.css``
+  view, so browsers refresh the CSS when an institution changes its colors.
+  [DELIBE-306]
+  [aduchene]
+
+- Add Plausible web statistics dashboards: a ``@@statistics`` view on each
+  institution and a global control panel. The dashboard is shown in an
+  iframe; the Plausible site and its shared link are created (or refreshed)
+  on each visit, so the dashboard keeps working even if the link is deleted
+  or changed on the Plausible side. The Plausible URL, API key and site
+  domain are set in the registry, and a clear message is shown when Plausible
+  is not reachable. [DELIBE-307]
+  [aduchene]
+
+- Add RSS/Atom feeds of the latest decisions and publications. Feeds are
+  available on the usual Plone URLs, e.g.
+  ``/<institution>/publications/rss.xml``, and list the most recent
+  published items first. An upgrade step turns them on for existing
+  institutions. [DELIBE-255]
+  [aduchene]
+
+- Add a "Remove expiration date" action on publications, for publications
+  managers and site administrators. It clears the expiration date while
+  keeping the qualified timestamp. Also improve the help text of the
+  expiration date field. [DELIBE-305]
+  [aduchene]
+
+- Drop support for Python 3.11; require Python >= 3.12 (``python_requires``,
+  classifiers and Ruff ``target-version`` updated accordingly).
+  [aduchene]
+
+- Adopt Ruff for Python linting/formatting (``pyproject.toml`` ``[tool.ruff]``,
+  ``line-length = 120``) and ``zpretty`` for templates/ZCML/XML; drop the old
+  ``.flake8`` / ``.isort.cfg`` / ``setup.cfg``. Run on demand via ``make lint``
+  (``ruff check``) and ``make format`` (``ruff`` + ``zpretty``) — no pre-commit,
+  tox or CI. The codebase is intentionally not reformatted here; run
+  ``make format`` to apply it as a dedicated change. [DELIBE-291]
+  [aduchene]
+
+- Add a configurable ``website_url`` field on ``Institution`` that keeps a
+  published ``Link`` (``website-url``) to the communal website in sync. The
+  link is managed from the add/modify event subscribers
+  (``sync_website_link``) instead of a property setter, so it no longer
+  crashes when the field is set before the institution is added to the
+  portal, and clearing the URL removes the link. [DELIBE-112]
+  [aduchene]
+
+- Fix test layer: load ``imio.omnia.core``, ``imio.omnia.assistant`` and
+  ``imio.omnia.tinymce`` ZCML in ``testing.py`` so the ``:default`` profile
+  dependency chain resolves under the test fixture (``z3c.autoinclude`` is
+  disabled there).
+  [aduchene]
+- Remove dead ``get_api_url_for_meeting_item`` (singular) helper from
+  ``utils.py`` — orphaned since 2021 with no callers.
+  [aduchene]
+- Tighten ``.coveragerc`` ``include`` pattern so it matches regardless of
+  the cwd from which coverage is invoked.
+  [aduchene]
+- Add tests for ``PreSyncReportForm._reconcile_items`` /
+  ``_reconcile_annexes``, ``ImportMeetingForm`` / ``PreSyncReportForm`` /
+  ``PreImportReportForm`` button handlers, the ``sync_meeting``
+  orchestrator, ``MeetingAddForm.updateFields``,
+  ``MeetingEditForm.handleApply`` / ``handleCancel``, the
+  ``validate_no_already_superseded`` schema validator and
+  ``SupersedeAdapter.supersedes_items`` / ``has_supersedes_items``, plus
+  ``get_api_url_for_presync_meeting_items``. Suite goes 182 → 204 tests;
+  application-code coverage 87% → 94%.
+  [aduchene]
+
+### plonetheme.deliberations (1.7 → 1.8)
+
+#### Version 1.8 (2026-06-15)
+
+- Style the ``website-url`` navigation item (return link to the
+  institution's own website): pushed to the far right on desktop and
+  flagged with an outbound-link icon. [DELIBE-112]
+  [aduchene]
+- Brand the edit toolbar: iMio header with the institution logo (linking
+  to the site root) and the navigation-root title (linking to the
+  navigation root).
+  [aduchene]
+- On mobile and tablet (<992px), replace the cramped collapsed toolbar
+  with a floating action button that slides the toolbar in as an
+  off-canvas left icon-rail.
+  [aduchene]
+- Host the toolbar template override
+  (``plone.app.layout.viewlets.toolbar``) in the theme instead of
+  plonemeeting.portal.core.
+  [aduchene]
+- Give the ``#portal-globalnav`` a top gradient border matching the
+  footer.
+  [aduchene]
+- Style the "Flux RSS" document action as a centered pill button using
+  the institution colour.
+  [aduchene]
+- On mobile and tablet (<992px), replace the offcanvas hamburger menu
+  with a fixed bottom tab bar (a Preact component built from the global
+  navigation): up to three primary section tabs plus a "Plus" overflow
+  popover, the active tab using the per-institution accent colour.
+  [aduchene]
+- Compact the mobile/tablet header: cap the institution logo height and
+  trim the surrounding padding so page content is no longer pushed
+  below the fold.
+  [aduchene]
+- Align the Plausible statistics dashboard (``@@statistics`` /
+  ``@@plausible-statistics``) with the site's content container: oversize
+  the embed iframe by the dashboard's internal side padding (the
+  dashboard's own max-width is lifted through Plausible's embed styles
+  injection, see plonemeeting.portal.core). [DELIBE-307]
+  [aduchene]
+
 ## Release 2.4.1
 
 **Date:** 2026-04-03
