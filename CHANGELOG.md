@@ -1,5 +1,16 @@
 # Changelog
 
+## Release 2.4.9
+
+**Date:** 2026-06-15
+
+
+- Docker: register the cron tick idempotently. The entrypoint now overwrites
+  the ``imio`` crontab instead of appending to it, so restarting an instance
+  (``docker start`` / ``restart: always``) no longer accumulates duplicate
+  ``*/15 * * * * /tick.sh`` entries that fire the tick multiple times.
+  [aduchene]
+
 ## Release 2.4.8
 
 **Date:** 2026-06-15
