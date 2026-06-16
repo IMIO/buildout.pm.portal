@@ -1,5 +1,20 @@
 # Changelog
 
+## Release 2.4.12
+
+**Date:** 2026-06-16
+
+
+### collective.big.bang (1.0.3 → 1.1.0)
+
+#### Version 1.1.0 (2025-10-14)
+
+- Added expansion feature, which allows to perform all pending upgrade steps in one operation.
+  [bsuttor]
+
+- Upgrade dev environment to Plone 6.1
+  [remdub]
+
 ## Release 2.4.11
 
 **Date:** 2026-06-16
