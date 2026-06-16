@@ -1,5 +1,18 @@
 # Changelog
 
+## Release 2.4.11
+
+**Date:** 2026-06-16
+
+
+### plonetheme.deliberations (1.8 → 1.9)
+
+#### Version 1.9 (2026-06-16)
+
+- On mobile (<768px), pin the fixed PDF viewer toolbar to the top of the
+  viewport (``top: 0``) since the navbar is now fixed at the bottom.
+  [aduchene]
+
 ## Release 2.4.10
 
 **Date:** 2026-06-16

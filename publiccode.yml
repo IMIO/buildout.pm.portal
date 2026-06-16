@@ -4,8 +4,8 @@ name: "délibérations.be"
 applicationSuite: "iA.Délib"
 url: "https://github.com/IMIO/buildout.pm.portal"
 landingURL: "https://github.com/IMIO/buildout.pm.portal"
-softwareVersion: "2.4.8"
-releaseDate: "2026-06-15"
+softwareVersion: "2.4.11"
+releaseDate: "2026-06-16"
 logo: ".github/img/logo.svg"
 
 platforms:
