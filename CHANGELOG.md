@@ -1,5 +1,15 @@
 # Changelog
 
+## Release 2.4.10
+
+**Date:** 2026-06-16
+
+
+- Pin ``plone.restapi`` to 9.15.6 to address CVE-2026-54503.
+  [aduchene]
+- Pin ``plone.app.textfield`` to 3.0.2 (Plone 6.1).
+  [aduchene]
+
 ## Release 2.4.9
 
 **Date:** 2026-06-15
