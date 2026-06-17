@@ -1,5 +1,18 @@
 # Changelog
 
+## Release 2.4.13
+
+**Date:** 2026-06-17
+
+
+### buildout.pm.portal
+
+- Bake the deliberations.be deploy-automation upgrade helpers into the image
+  (`scripts/check-pending-upgrades.py`, `scripts/run-upgrades.py`) and remove the
+  dead `scripts/run_portal_upgrades.py` (it imported `collective.upgrade`, which
+  is not installed in the image). (DELIBE-311)
+  [aduchene]
+
 ## Release 2.4.12
 
 **Date:** 2026-06-16
