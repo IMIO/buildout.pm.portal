@@ -1,5 +1,21 @@
 # Changelog
 
+## Release 2.4.14
+
+**Date:** 2026-06-24
+
+
+### buildout.pm.portal
+
+- Pin the Plone 6.1 security fixes announced 2026-06-23
+  (https://community.plone.org/t/plone-security-fixes-20260623/23085):
+  ``plone.app.portlets==6.0.4`` (GHSA-rr49-f9g6-c9r5, GHSA-x5g3-w747-2h8q),
+  ``plone.app.event==5.2.4`` (GHSA-r82h-mqw3-fc56),
+  ``plone.app.dexterity==4.1.3`` (GHSA-5426-92w4-wvhv),
+  ``plone.app.contenttypes==4.0.10`` (GHSA-8pcw-h6w9-h46g) and
+  ``RestrictedPython==8.3`` (GHSA-ffg3-p8fm-mjx2).
+  [aduchene]
+
 ## Release 2.4.13
 
 **Date:** 2026-06-17
