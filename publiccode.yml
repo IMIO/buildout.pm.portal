@@ -1,4 +1,4 @@
-publiccodeYmlVersion: "0.7"
+publiccodeYmlVersion: "0"
 
 name: "délibérations.be"
 applicationSuite: "iA.Délib"
@@ -230,7 +230,7 @@ intendedAudience:
     - local-authorities
     - government
   countries:
-    - be
+    - BE
 
 description:
   en:
@@ -256,8 +256,6 @@ description:
       - ".github/img/screenshot_meeting.jpg"
       - ".github/img/screenshot_publication.jpg"
       - ".github/img/screenshot_deliberation.jpg"
-    videos: [ ]
-    awards: [ ]
 
   fr:
     localisedName: "Delibérations.be"
@@ -282,13 +280,10 @@ description:
       - ".github/img/screenshot_meeting.jpg"
       - ".github/img/screenshot_publication.jpg"
       - ".github/img/screenshot_deliberation.jpg"
-    videos: [ ]
-    awards: [ ]
 
 legal:
   license: "GPL-2.0"
   mainCopyrightOwner: "iMio, scrl"
-  repoOwner: "iMio, scrl"
 
 maintenance:
   type: "internal"
@@ -306,7 +301,7 @@ localisation:
   localisationReady: true
   availableLanguages:
     - fr
-    - en (80% translated)
+    - en
 
 dependsOn:
   open:
@@ -314,5 +309,3 @@ dependsOn:
       versionMin: "6.1"
     - name: "Python"
       versionMin: "3.12"
-  proprietary: [ ]
-  hardware: [ ]
