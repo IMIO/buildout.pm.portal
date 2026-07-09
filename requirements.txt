@@ -3,3 +3,8 @@ pip==25.3
 setuptools==80.9.0
 wheel>=0.46.2
 zc.buildout==4.1.12
+# Bridges pkg_resources-style and PEP 420 native namespace packages so the
+# mixed zope.* stack imports cleanly (e.g. zope.testrunner 8.x). Must be pip
+# installed into the buildout virtualenv, NOT via buildout (its .pth needs to
+# live in site-packages). Drop once the whole zope.* namespace is native.
+horse-with-no-namespace==20260202.0
