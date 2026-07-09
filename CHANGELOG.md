@@ -1,5 +1,32 @@
 # Changelog
 
+## Release 2.4.15
+
+**Date:** 2026-07-09
+
+
+### plonemeeting.portal.core (2.4.3 → 2.4.4)
+
+#### Version 2.4.4 (2026-07-09)
+
+- DELIBE-318: Store the ``meeting_type`` on each meeting instead of reading it
+  from the institution. The value is copied from the institution at import time,
+  views read it from the meeting (falling back to the institution), and an
+  upgrade step backfills existing meetings. First step toward decoupling the
+  iA.Délib configuration.
+  [aduchene]
+- DELIBE-285: Add a "Duplicate" publication action that opens the add form
+  pre-filled from the original (except timestamps and publication dates) and
+  sets the new publication to supersede the original.
+  [aduchene]
+- DELIBE-312: Fix an issue when an anonymous user was trying to access a private decision.
+  Add a new comprehensive unit test `test_anonymous_unauthorized_item_view`.
+  [aduchene]
+- DELIBE-319: Be more defensive in `_fetch_external_data_for_vocabulary`: when a meeting
+  config is disabled in iA.Delib, the `extra_include_*` key is missing from the response,
+  which raised a `KeyError`. Now log a warning and keep the previously saved values.
+  [aduchene]
+
 ## Release 2.4.14
 
 **Date:** 2026-06-24
