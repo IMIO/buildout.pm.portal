@@ -1,5 +1,21 @@
 # Changelog
 
+## Release 2.5.1
+
+**Date:** 2026-08-03
+
+
+### imio.omnia.core (1.0 → 1.1)
+
+#### Version 1.1 (2026-08-03)
+
+- Fix an instance startup crash loop: when every mapped environment variable
+  already matched the registry, ``sync_env_to_registry`` left the connection
+  joined to a transaction (silencing the fingerpointing audit log writes to
+  the registry unconditionally) and ``ConnectionStateError`` aborted Zope
+  startup.
+  [duchenean]
+
 ## Release 2.5.0
 
 **Date:** 2026-08-03
