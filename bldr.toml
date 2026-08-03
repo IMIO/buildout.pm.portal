@@ -24,6 +24,18 @@ allow_prerelease = false
 name = "imio.webspellchecker"
 allow_prerelease = false
 
+[[packages]]
+name = "imio.omnia.core"
+allow_prerelease = false
+
+[[packages]]
+name = "imio.omnia.tinymce"
+allow_prerelease = false
+
+[[packages]]
+name = "imio.omnia.assistant"
+allow_prerelease = false
+
 [git]
 auto_push = false
 commit_template = "Use {packages}"

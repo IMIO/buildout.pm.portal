@@ -1,5 +1,68 @@
 # Changelog
 
+## Release 2.5.0
+
+**Date:** 2026-08-03
+
+
+- Upgrade to Plone 6.1.5 (https://dist.plone.org/release/6.1.5): bump the
+  ``versions.cfg``/``versions-extra.cfg`` extends in ``prod.cfg`` and the
+  ``harbor.imio.be/common/plone-base`` base image plus ``PLONE_VERSION`` in
+  ``docker/Dockerfile``. ``dev.cfg`` needed no change since it already tracks
+  ``6.1-latest``.
+  [aduchene]
+- Drop the now-redundant security overrides from ``versions.cfg``: Plone 6.1.5
+  ships the exact same versions, so ``plone.restapi==9.15.6``,
+  ``plone.app.textfield==3.0.2`` (CVE-2026-54503) and
+  ``plone.app.portlets==6.0.4``, ``plone.app.event==5.2.4``,
+  ``plone.app.dexterity==4.1.3``, ``plone.app.contenttypes==4.0.10``,
+  ``RestrictedPython==8.3`` (security fixes 2026-06-23) are no longer pinned
+  locally.
+  [aduchene]
+- Follow the ``imio.omnia.core`` 1.0 ``httpx`` → ``httpx2`` migration in
+  ``versions.cfg``: drop the ``httpx==0.28.1`` pin and pin ``httpx2==2.9.1``,
+  ``httpcore2==2.9.1``, ``truststore==0.10.4`` plus the new ``authlib==1.7.2``
+  and its ``joserfc==1.7.4`` dependency. Also override ``idna`` to 3.18, since
+  ``httpx2`` requires ``idna>=3.18`` while the Zope 5.14.2 version set
+  (inherited via Plone 6.1.5) pins it to 3.11.
+  [aduchene]
+
+### imio.omnia.core (1.0a2 → 1.0)
+
+#### Version 1.0 (2026-08-03)
+
+- DELIBE-289: Add configurable API timeout.
+  [duchenean]
+- OIA-241: Authenticate outbound Omnia API calls with Keycloak SSO-Apps
+  OAuth 2.0 (ROPC / client credentials via authlib), configurable in the
+  control panel, with credentials supplied by the cross-application
+  ``SSO_APPS_*`` environment variables. OAuth 2.0 is the default scheme for
+  both the Omnia Core API and the OpenAI gateway.
+  [duchenean]
+- DELIBE-322: Replace ``httpx`` with ``httpx2`` (maintained pydantic fork).
+  [duchenean]
+- Removed the unused Vite/React scaffold from ``browser/resources``.
+  [duchenean]
+
+### imio.omnia.tinymce (1.0a4 → 1.0)
+
+#### Version 1.0 (2026-08-03)
+
+- Build the JS bundle from the published `@imiobe/omnia-tinymce` npm package (pinned to 0.3.0) instead of the git submodule sources.
+  [thomlamb]
+
+### imio.omnia.assistant (1.0a4 → 1.0)
+
+#### Version 1.0 (2026-08-03)
+
+- OIA-241: Follow imio.omnia.core's httpx -> httpx2 migration in test mocks;
+  drop unused httpx dependency.
+  [duchenean]
+
+- OIA-241: Bundle the UI from the published npm package
+  @imiobe/omnia-assistant-ui (0.3.2) instead of a git submodule.
+  [duchenean]
+
 ## Release 2.4.15
 
 **Date:** 2026-07-09
