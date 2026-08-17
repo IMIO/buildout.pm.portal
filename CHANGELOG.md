@@ -43,6 +43,15 @@
   qualified timestamps are preserved.
   [aduchene]
 
+### plonetheme.deliberations (1.9 → 1.10)
+
+#### Version 1.10 (2026-08-17)
+
+- Style the ``@@login-choice`` page: equal-height buttons, a pink
+  Wallonie Connect button and a full-width migration notice flush with
+  the card edges.
+  [aduchene]
+
 ## Release 2.5.1
 
 **Date:** 2026-08-03
