@@ -18,6 +18,11 @@ package.json
 Gruntfile.js
 pyvenv.cfg
 
+# secrets - never commit
+.env
+.env.*
+!.env.example
+
 #dirs
 bin/
 buildout-cache/
