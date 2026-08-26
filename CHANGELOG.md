@@ -1,5 +1,18 @@
 # Changelog
 
+## Release 2.5.3
+
+**Date:** 2026-08-26
+
+
+### plonemeeting.portal.core (2.5.0 → 2.5.1)
+
+#### Version 2.5.1 (2026-08-26)
+
+- DELIBE-297: Add an admin-only page to manually migrate a user account onto
+  another one, for accounts whose email does not match their SSO identity.
+  [aduchene]
+
 ## Release 2.5.2
 
 **Date:** 2026-08-17
