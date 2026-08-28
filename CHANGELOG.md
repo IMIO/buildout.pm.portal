@@ -1,5 +1,20 @@
 # Changelog
 
+## Release 2.5.4
+
+**Date:** 2026-08-28
+
+
+### plonemeeting.portal.core (2.5.1 → 2.5.2)
+
+#### Version 2.5.2 (2026-08-28)
+
+- DELIBE-331: Make the homepage map tile server URL and attribution
+  configurable through two Plone registry records, passed to the
+  institutions map component with the previous Carto values kept as
+  defaults/fallbacks.
+  [aduchene]
+
 ## Release 2.5.3
 
 **Date:** 2026-08-26
