@@ -1,5 +1,48 @@
 # Changelog
 
+## Release 2.6.0
+
+**Date:** 2026-09-28
+
+
+### buildout.pm.portal
+
+- DELIBE-293: Add ``imio.emailkit`` to the instance eggs, for styled and
+  translated HTML mails. Its ``imio.recipe.emailkit`` recipe is wired as the
+  ``emails`` part in ``dev.cfg`` and generates ``bin/compile-emails``,
+  ``bin/check-emails`` and ``bin/preview-emails``. Both packages are pinned in
+  ``versions.cfg`` and tracked in ``bldr.toml``.
+  [aduchene]
+
+### imio.emailkit (new → 1.0.0b3)
+
+#### Version 1.0.0b3 (2026-09-28)
+
+- Release again with no code change. The PyPI simple index did not list
+  1.0.0b2.
+  [aduchene]
+
+#### Version 1.0.0b2 (2026-09-28)
+
+- Add the ``imio.emailkit:user_migrated_to_sso`` template. It tells a user that
+  their local account now logs in through Wallonie Connect, shows their
+  former username, and links to the Wallonie Connect documentation.
+  [aduchene]
+- Stop ``bin/preview-emails`` reporting FAILED for a fixture that an installed
+  egg cannot ship. A package with no source tree is now reported as a plain
+  fact, as ``@@emailkit-preview`` already does.
+  [aduchene]
+
+#### Version 1.0.0b1 (2026-09-14)
+
+- Initial release: ``render()`` and ``render_shell()`` with entry-point template
+  discovery, the ``Email`` builder with per-language, transaction-safe
+  delivery, the *"Send styled email"* content-rule action, the Manager-only
+  ``@@emailkit-preview`` view, the built-in design kit with dark-mode support,
+  restyled Plone password-reset and registration mails, and FR/NL/DE catalogs.
+  See https://github.com/IMIO/imio.emailkit/blob/main/CHANGELOG.md.
+  [aduchene]
+
 ## Release 2.5.4
 
 **Date:** 2026-08-28

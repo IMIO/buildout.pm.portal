@@ -36,6 +36,14 @@ allow_prerelease = false
 name = "imio.omnia.assistant"
 allow_prerelease = false
 
+[[packages]]
+name = "imio.emailkit"
+allow_prerelease = true
+
+[[packages]]
+name = "imio.recipe.emailkit"
+allow_prerelease = true
+
 [git]
 auto_push = false
 commit_template = "Use {packages}"
