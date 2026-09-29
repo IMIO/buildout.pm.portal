@@ -1,8 +1,8 @@
-FROM harbor.imio.be/common/plone-base:6.1.5 AS builder
+FROM harbor.imio.be/common/plone-base:6.2.2 AS builder
 
-ENV ZC_BUILDOUT=4.1.12 \
-    PLONE_MAJOR=6.1 \
-    PLONE_VERSION=6.1.5
+ENV ZC_BUILDOUT=5.2.0 \
+    PLONE_MAJOR=6.2 \
+    PLONE_VERSION=6.2.2
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
@@ -14,14 +14,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libjpeg62-dev \
   libopenjp2-7-dev \
   libmemcached-dev \
-  libpcre3-dev \
   libpq-dev \
   libreadline-dev \
   libssl-dev \
   libxml2-dev \
   libxslt1-dev \
   python3-dev \
-  python3.12-venv \
+  python3-venv \
   python3-pip \
   wget \
   zlib1g-dev \
@@ -41,16 +40,16 @@ COPY --chown=imio scripts /plone/scripts
 RUN /plone/bin/buildout -c docker.cfg -t 30 -N
 
 #
-#FROM ubuntu:24.04 AS uno_src
+#FROM ubuntu:26.04 AS uno_src
 #RUN apt-get update && apt-get install -y --no-install-recommends \
-#      python3.12 python3-uno libreoffice-core \
+#      python3.14 python3-uno libreoffice-core \
 #  && rm -rf /var/lib/apt/lists/*
 
 
-FROM harbor.imio.be/common/plone-base:6.1.5
+FROM harbor.imio.be/common/plone-base:6.2.2
 ARG build_number
-ENV ZC_BUILDOUT=4.1.12 \
-  PLONE_VERSION=6.1.5 \
+ENV ZC_BUILDOUT=5.2.0 \
+  PLONE_VERSION=6.2.2 \
   HOSTNAME_HOST=local \
   PROJECT_ID=delib \
   PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default \
@@ -63,11 +62,11 @@ WORKDIR /plone
 RUN apt-get update && apt-get install -y --no-install-recommends \
   cron \
   libjpeg62 \
-  libmemcached11 \
+  libmemcached11t64 \
   libopenjp2-7 \
   libpq5 \
   libtiff6 \
-  libxml2 \
+  libxml2-16 \
   libxslt1.1 \
   lynx \
   netcat-openbsd \

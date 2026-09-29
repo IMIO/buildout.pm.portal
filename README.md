@@ -17,7 +17,7 @@ Deliberations.be is a web application for citizens to consult official deliberat
 
 ## Requirements
 
-* **Plone CMS**: ≥ 6.1
+* **Plone CMS**: ≥ 6.2
 * **Python**: ≥ 3.12
 * **Buildout**: Installed in your environment
 

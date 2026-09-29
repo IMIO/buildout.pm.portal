@@ -2,13 +2,13 @@
 
 ## Project overview
 
-**Deliberations.be** (Plonemeeting Portal) - a Plone 6.1 web application for citizens to consult official deliberations and publications from Walloon local authorities (Belgium). Built and maintained by [iMio](https://imio.be).
+**Deliberations.be** (Plonemeeting Portal) - a Plone 6.2 web application for citizens to consult official deliberations and publications from Walloon local authorities (Belgium). Built and maintained by [iMio](https://imio.be).
 
 This repository is the **buildout** (deployment/development harness). The actual application code lives in `src/` as mr.developer checkouts, primarily in `plonemeeting.portal.core`.
 
 ## Tech stack
 
-- **Plone 6.1** on **Python 3.12**
+- **Plone 6.2** on **Python 3.14** (≥ 3.12 supported)
 - **zc.buildout** for dependency management and instance configuration
 - **mr.developer** for source checkouts in `src/`
 - ZODB (Data.fs + blobstorage) or optional RelStorage (PostgreSQL)
@@ -18,7 +18,7 @@ This repository is the **buildout** (deployment/development harness). The actual
 
 ```
 buildout.cfg          # Entry point - extends dev.cfg (or prod.cfg / docker.cfg)
-dev.cfg               # Development profile (extends plone-6.1.x.cfg + base.cfg)
+dev.cfg               # Development profile (extends plone-6.2.x.cfg + base.cfg)
 prod.cfg              # Production profile (extends Plone release pinnings)
 base.cfg              # Shared: eggs, zcml, instance recipe
 sources.cfg           # mr.developer source repos (GitHub IMIO / collective)
