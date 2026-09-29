@@ -39,7 +39,7 @@ cleanall:
 
 .PHONY: bootstrap
 bootstrap:
-	python3.12 -m venv .
+	python3.14 -m venv .
 	bin/pip install -r requirements.txt
 
 .PHONY: docker-image
