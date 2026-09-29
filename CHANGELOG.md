@@ -1,5 +1,37 @@
 # Changelog
 
+## Release 2.7.0
+
+**Date:** 2026-09-29
+
+
+### buildout.pm.portal
+
+- DELIBE-309: Upgrade to Plone 6.2.2 (https://dist.plone.org/release/6.2.2):
+  extend its ``versions.cfg``/``versions-extra.cfg`` in ``prod.cfg`` and
+  ``plone-6.2.x.cfg`` in ``dev.cfg``. The ``harbor.imio.be/common/plone-base``
+  base image in ``docker/Dockerfile`` moves to 6.2.2, which runs Ubuntu 26.04
+  and Python 3.14: install ``python3-venv``, ``libmemcached11t64`` and
+  ``libxml2-16``, and drop ``libpcre3-dev``. ``make bootstrap`` uses
+  ``python3.14``.
+  [aduchene]
+- DELIBE-309: Align the build tool pins in ``versions.cfg`` and
+  ``requirements.txt`` with Plone 6.2.2: ``zc.buildout==5.2.0``,
+  ``setuptools==81.0.0``, ``pip==26.2.1``, ``wheel==0.48.0`` and
+  ``packaging==26.3``. Drop the overrides older than the Plone 6.2.2 pins
+  (``prompt-toolkit``, ``docutils``, ``python-dateutil``, ``anyio``, ``idna``).
+  Keep ``natsort==6.2.1``: natsort 8 sorts accented category titles after
+  plain ones in the C locale.
+  [aduchene]
+- DELIBE-309: Use ``imio.recipe.emailkit = 1.0.0b5``, which allows Python 3.14.
+  [aduchene]
+- DELIBE-309: Add a ``harbor.imio.be/common/libreoffice:26.2`` sidecar to
+  ``docker/docker-compose.yml``, set with ``OO_SERVER`` and ``OO_PORT``. The
+  UNO client in the image is LibreOffice 26.2 and drops the connection to
+  LibreOffice 7.3 and 25.2 servers: upgrade the LibreOffice sidecar to 26.2
+  before you deploy this release.
+  [aduchene]
+
 ## Release 2.6.1
 
 **Date:** 2026-09-29
