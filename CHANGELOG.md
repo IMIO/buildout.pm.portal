@@ -1,5 +1,24 @@
 # Changelog
 
+## Release 2.6.1
+
+**Date:** 2026-09-29
+
+
+### plonemeeting.portal.core (2.5.2 → 2.6.0)
+
+#### Version 2.6.0 (2026-09-28)
+
+- Fix the wrong title attributes on buttons on the ``@@manage-institution`` view.
+  [aduchene]
+- DELIBE-293: Add ``imio.emailkit`` to send styled emails.
+  [aduchene]
+- DELIBE-293: Send an email to the user when their account moves to SSO.
+  [aduchene]
+- SUP-55384: The Keycloak sync and the local-to-SSO migration grant the
+  ``Member`` role to SSO accounts that have no role.
+  [aduchene]
+
 ## Release 2.6.0
 
 **Date:** 2026-09-28
