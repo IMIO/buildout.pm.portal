@@ -1,5 +1,25 @@
 # Changelog
 
+## Release 2.7.1
+
+**Date:** 2026-10-23
+
+
+### buildout.pm.portal
+
+- Upgrade to Plone 6.2.2.1 (https://dist.plone.org/release/6.2.2.1) for the
+  Plone security fixes of 2026-10-22. It uses ``plone.app.content==5.0.1``,
+  which fixes an information disclosure (GHSA-vhwp-qc29-j4xp, CVSS 5.3):
+  anonymous users could list the ids and names of the users and groups of
+  the site through the REST API. It also uses ``certifi==2026.10.19`` and
+  ``Pillow==13.0.0``. The ``harbor.imio.be/common/plone-base`` base image in
+  ``docker/Dockerfile`` moves to 6.2.2.1, which has updated
+  ``ca-certificates``.
+  [aduchene]
+- Use ``pip==26.2.2`` in ``versions.cfg`` and ``requirements.txt``, as
+  Plone 6.2.2.1 does.
+  [aduchene]
+
 ## Release 2.7.0
 
 **Date:** 2026-09-29

@@ -1,8 +1,8 @@
-FROM harbor.imio.be/common/plone-base:6.2.2 AS builder
+FROM harbor.imio.be/common/plone-base:6.2.2.1 AS builder
 
 ENV ZC_BUILDOUT=5.2.0 \
     PLONE_MAJOR=6.2 \
-    PLONE_VERSION=6.2.2
+    PLONE_VERSION=6.2.2.1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
@@ -46,10 +46,10 @@ RUN /plone/bin/buildout -c docker.cfg -t 30 -N
 #  && rm -rf /var/lib/apt/lists/*
 
 
-FROM harbor.imio.be/common/plone-base:6.2.2
+FROM harbor.imio.be/common/plone-base:6.2.2.1
 ARG build_number
 ENV ZC_BUILDOUT=5.2.0 \
-  PLONE_VERSION=6.2.2 \
+  PLONE_VERSION=6.2.2.1 \
   HOSTNAME_HOST=local \
   PROJECT_ID=delib \
   PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default \
