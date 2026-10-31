@@ -1,6 +1,6 @@
 packaging==26.3
 pip==26.2.2
-setuptools==81.0.0
+setuptools==84.1.0
 wheel==0.48.0
 zc.buildout==5.2.0
 # Bridges pkg_resources-style and PEP 420 native namespace packages so the
