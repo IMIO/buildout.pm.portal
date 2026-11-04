@@ -111,6 +111,13 @@ Releases are managed with **bldr** (see `bldr.toml`):
 - Generates consolidated `CHANGELOG.md` from sub-package changelogs
 - Creates GitHub releases with tag
 
+Every PR on this repo adds its entry to `CHANGELOG.md`, under
+`## Unreleased` → `### buildout.pm.portal` (create them at the top when
+they are missing): `- <TICKET>: <change>.` then `  [<author>]`. bldr does
+not know this section: at release, rename `## Unreleased` to
+`## Release <version>` with its `**Date:**` line, and merge it with the
+section that bldr adds.
+
 ## Notes
 
 - Default admin credentials for dev: `admin:admin` (see `port.cfg`)

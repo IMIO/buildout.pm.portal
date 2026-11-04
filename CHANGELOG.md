@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+
+### buildout.pm.portal
+
+- Use ``imio.omnia.core = 1.3`` and ``imio.omnia.assistant = 1.1``.
+  ``imio.omnia.core`` 1.3 removes ``imio.omnia.core.tokens``, which
+  ``imio.omnia.assistant`` 1.0 imports.
+  [aduchene]
+
 ## Release 2.7.1
 
 **Date:** 2026-10-23
