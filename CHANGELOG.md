@@ -1,14 +1,60 @@
 # Changelog
 
-## Unreleased
+## Release 2.7.2
+
+**Date:** 2026-11-04
 
 
-### buildout.pm.portal
+### plonemeeting.portal.core (2.6.0 → 2.6.1)
 
-- Use ``imio.omnia.core = 1.3`` and ``imio.omnia.assistant = 1.1``.
-  ``imio.omnia.core`` 1.3 removes ``imio.omnia.core.tokens``, which
-  ``imio.omnia.assistant`` 1.0 imports.
+#### Version 2.6.1 (2026-11-04)
+
+- DELIBE-309: Support Plone 6.2 on Python 3.12 to 3.14, and run the tests
+  against Plone 6.2.
   [aduchene]
+- DELIBE-309: Fix the "Settings" tab marked as current on every institution
+  page with Plone 6.2.
+  [aduchene]
+- DELIBE-309: Keep ``logo_raster.png`` when the frontend bundle is built.
+  [aduchene]
+- DELIBE-320: Bust the cache of the institution custom colors CSS when an
+  institution is added or modified.
+  [aduchene]
+- Set the institution authentication method after the migration of its users
+  to SSO: ``oidc`` when no local account remains, else a new ``both`` value
+  that sends the login link to ``@@login-choice``.
+  [aduchene]
+- DELIBE-341: Reserve the institution "Authentication" fieldset to Zope
+  admins. Institution managers could see and edit it.
+  [aduchene]
+
+### imio.omnia.core (1.1 → 1.3)
+
+#### Version 1.3 (2026-10-09)
+
+- Breaking: replace the custom HMAC Bearer token of ``@@omnia-openai-api`` by
+  plone.protect's CSRF token (``X-CSRF-TOKEN`` header) and remove
+  ``imio.omnia.core.tokens``.
+  [chris-adam]
+
+#### Version 1.2 (2026-08-11)
+
+- Set `Plone` as the default `SITE_ID` when not defined.
+  [boulch]
+
+### imio.omnia.assistant (1.0 → 1.1)
+
+#### Version 1.1 (2026-10-09)
+
+- Bump @imiobe/omnia-assistant-ui from 0.3.2 to 2.9.0 and replace the HMAC
+  token by Plone's CSRF token (``X-CSRF-TOKEN`` header).
+  [chris-adam]
+- Replace the ``mode`` setting by ``layout`` (``floating`` / ``sidebar``),
+  migrated by upgrade step 1003.
+  [chris-adam]
+- Require imio.omnia.core 1.3: its proxy checks the CSRF token the widget
+  sends.
+  [duchenean]
 
 ## Release 2.7.1
 
