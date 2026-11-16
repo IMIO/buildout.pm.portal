@@ -9,6 +9,12 @@
   ``--fail-with-body``, so an HTTP error is logged as a failure with its
   response body.
   [aduchene]
+- Use ``imio.recipe.emailkit==1.0.0b6``. With ``zc.buildout`` 6, version
+  1.0.0b5 of this recipe does not load when a develop egg declares the
+  ``imio`` namespace in the ``pkg_resources`` style
+  (``No module named 'imio.recipe'``), so the CI of the packages that extend
+  ``dev.cfg`` fails.
+  [aduchene]
 
 ## Release 2.7.3
 
