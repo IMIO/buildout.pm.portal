@@ -1,6 +1,6 @@
 FROM harbor.imio.be/common/plone-base:6.2.3 AS builder
 
-ENV ZC_BUILDOUT=6.0.2 \
+ENV ZC_BUILDOUT=5.2.0 \
     PLONE_MAJOR=6.2 \
     PLONE_VERSION=6.2.3
 
@@ -48,7 +48,7 @@ RUN /plone/bin/buildout -c docker.cfg -t 30 -N
 
 FROM harbor.imio.be/common/plone-base:6.2.3
 ARG build_number
-ENV ZC_BUILDOUT=6.0.2 \
+ENV ZC_BUILDOUT=5.2.0 \
   PLONE_VERSION=6.2.3 \
   HOSTNAME_HOST=local \
   PROJECT_ID=delib \

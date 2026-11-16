@@ -15,6 +15,14 @@
   (``No module named 'imio.recipe'``), so the CI of the packages that extend
   ``dev.cfg`` fails.
   [aduchene]
+- Use ``zc.buildout==5.2.0`` again in ``versions.cfg``, ``requirements.txt``
+  and ``docker/Dockerfile``. zc.buildout 6.0.2 processes the ``-nspkg.pth``
+  files of develop eggs, so a recipe does not load when it shares a
+  namespace with a develop egg that declares this namespace in the
+  ``pkg_resources`` style: ``collective.recipe.omelette`` fails with
+  ``No module named 'collective.recipe'``, and the CI of the packages that
+  extend ``dev.cfg`` fails.
+  [aduchene]
 
 ## Release 2.7.3
 
