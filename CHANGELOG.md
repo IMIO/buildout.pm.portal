@@ -6,6 +6,53 @@
 
 - DELIBE-350: Add `scripts/clean_orphan_rids.py` to find and remove the orphan
   rids of the `portal_catalog`.
+- DELIBE-345: Raise the ``curl`` timeout of ``docker/tick.sh`` from 10 s to
+  300 s, so a slow ``@@tick_fifteen`` is no longer logged as failed. Use
+  ``--fail-with-body``, so an HTTP error is logged as a failure with its
+  response body.
+  [aduchene]
+- Use ``imio.recipe.emailkit==1.0.0b6``. With ``zc.buildout`` 6, version
+  1.0.0b5 of this recipe does not load when a develop egg declares the
+  ``imio`` namespace in the ``pkg_resources`` style
+  (``No module named 'imio.recipe'``), so the CI of the packages that extend
+  ``dev.cfg`` fails.
+  [aduchene]
+- DELIBE-328: The Docker image build writes one ``/plone/.version`` file
+  with ``version=`` and ``build=`` lines. It replaces ``.build_number``. A
+  new ``version`` build argument gives the version: the GitHub workflows
+  pass the tag for a release image (``2.7.3``), else the branch name. The
+  ``docker-image`` make target passes ``$(VERSION)``. The footer of
+  plonemeeting.portal.core reads this file to show the version and the
+  build number.
+- Use ``zc.buildout==5.2.0`` again in ``versions.cfg``, ``requirements.txt``
+  and ``docker/Dockerfile``. zc.buildout 6.0.2 processes the ``-nspkg.pth``
+  files of develop eggs, so a recipe does not load when it shares a
+  namespace with a develop egg that declares this namespace in the
+  ``pkg_resources`` style: ``collective.recipe.omelette`` fails with
+  ``No module named 'collective.recipe'``, and the CI of the packages that
+  extend ``dev.cfg`` fails.
+  [aduchene]
+
+## Release 2.7.3
+
+**Date:** 2026-11-16
+
+
+### buildout.pm.portal
+
+- Upgrade to Plone 6.2.3 (https://dist.plone.org/release/6.2.3) for the
+  Plone security fix of 2026-11-10 (remote code execution). It also uses
+  ``plone.restapi==10.2.1`` and ``plone.staticresources==3.0.10``, with the
+  TinyMCE 8.9.3 security fix. The ``harbor.imio.be/common/plone-base`` base
+  image in ``docker/Dockerfile`` moves to 6.2.3.
+  [aduchene]
+- Use ``pip==26.3`` and ``zc.buildout==6.0.2`` in ``versions.cfg`` and
+  ``requirements.txt``, as Plone 6.2.3 does. Keep ``setuptools==81.0.0``
+  (Plone 6.2.3 uses 84.2.1): setuptools 82 and later do not ship
+  ``pkg_resources``, and add-ons (``imio.helpers``, ``appy``,
+  ``collective.documentgenerator``, ``collective.exportimport``,
+  ``collective.fingerpointing``, ``collective.timedevents``,
+  ``eea.facetednavigation``) still import it at runtime.
   [aduchene]
 
 ## Release 2.7.2

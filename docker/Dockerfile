@@ -1,8 +1,8 @@
-FROM harbor.imio.be/common/plone-base:6.2.2.1 AS builder
+FROM harbor.imio.be/common/plone-base:6.2.3 AS builder
 
 ENV ZC_BUILDOUT=5.2.0 \
     PLONE_MAJOR=6.2 \
-    PLONE_VERSION=6.2.2.1
+    PLONE_VERSION=6.2.3
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
@@ -46,10 +46,11 @@ RUN /plone/bin/buildout -c docker.cfg -t 30 -N
 #  && rm -rf /var/lib/apt/lists/*
 
 
-FROM harbor.imio.be/common/plone-base:6.2.2.1
+FROM harbor.imio.be/common/plone-base:6.2.3
 ARG build_number
+ARG version
 ENV ZC_BUILDOUT=5.2.0 \
-  PLONE_VERSION=6.2.2.1 \
+  PLONE_VERSION=6.2.3 \
   HOSTNAME_HOST=local \
   PROJECT_ID=delib \
   PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,plonemeeting.portal.core:default \
@@ -96,7 +97,7 @@ RUN touch /etc/cron.d/plone-tick \
     && crontab -u imio /etc/cron.d/plone-tick \
     && chmod u+s /usr/sbin/cron
 
-RUN echo $build_number > .build_number
+RUN printf 'version=%s\nbuild=%s\n' "$version" "$build_number" > .version
 
 # Make the venv first on PATH at runtime
 ENV PATH="/plone/bin:${PATH}"
