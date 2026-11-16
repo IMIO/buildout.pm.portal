@@ -1,5 +1,27 @@
 # Changelog
 
+## Release 2.7.3
+
+**Date:** 2026-11-16
+
+
+### buildout.pm.portal
+
+- Upgrade to Plone 6.2.3 (https://dist.plone.org/release/6.2.3) for the
+  Plone security fix of 2026-11-10 (remote code execution). It also uses
+  ``plone.restapi==10.2.1`` and ``plone.staticresources==3.0.10``, with the
+  TinyMCE 8.9.3 security fix. The ``harbor.imio.be/common/plone-base`` base
+  image in ``docker/Dockerfile`` moves to 6.2.3.
+  [aduchene]
+- Use ``pip==26.3`` and ``zc.buildout==6.0.2`` in ``versions.cfg`` and
+  ``requirements.txt``, as Plone 6.2.3 does. Keep ``setuptools==81.0.0``
+  (Plone 6.2.3 uses 84.2.1): setuptools 82 and later do not ship
+  ``pkg_resources``, and add-ons (``imio.helpers``, ``appy``,
+  ``collective.documentgenerator``, ``collective.exportimport``,
+  ``collective.fingerpointing``, ``collective.timedevents``,
+  ``eea.facetednavigation``) still import it at runtime.
+  [aduchene]
+
 ## Release 2.7.2
 
 **Date:** 2026-11-04
