@@ -4,7 +4,7 @@
   SITE_ID="$1"
   timestamp=$(date +"%Y-%m-%d %H:%M:%S,%3N")
   label="[cron.tick_fifteen]"
-  response=$(curl -s -m 10 --netrc-file /plone/.netrc http://localhost:8081/$SITE_ID/@@tick_fifteen)
+  response=$(curl -s --fail-with-body -m 300 --netrc-file /plone/.netrc http://localhost:8081/$SITE_ID/@@tick_fifteen)
 
   exit_code=$?
   if [ $exit_code -eq 0 ]; then
