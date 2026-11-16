@@ -15,6 +15,13 @@
   (``No module named 'imio.recipe'``), so the CI of the packages that extend
   ``dev.cfg`` fails.
   [aduchene]
+- DELIBE-328: The Docker image build writes one ``/plone/.version`` file
+  with ``version=`` and ``build=`` lines. It replaces ``.build_number``. A
+  new ``version`` build argument gives the version: the GitHub workflows
+  pass the tag for a release image (``2.7.3``), else the branch name. The
+  ``docker-image`` make target passes ``$(VERSION)``. The footer of
+  plonemeeting.portal.core reads this file to show the version and the
+  build number.
 - Use ``zc.buildout==5.2.0`` again in ``versions.cfg``, ``requirements.txt``
   and ``docker/Dockerfile``. zc.buildout 6.0.2 processes the ``-nspkg.pth``
   files of develop eggs, so a recipe does not load when it shares a

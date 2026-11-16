@@ -1,5 +1,6 @@
 IMAGE_NAME="docker-staging.imio.be/iadelib/citizenportal:latest"
 BUILD_NUMBER ?= local
+VERSION ?= local
 
 # plonemeeting.portal.core owns its linting/formatting via plone.meta (ruff).
 CORE_DIR = src/plonemeeting.portal.core
@@ -44,4 +45,4 @@ bootstrap:
 
 .PHONY: docker-image
 docker-image:
-	docker build --no-cache --pull -f docker/Dockerfile --build-arg build_number=$(BUILD_NUMBER) -t iadelib/citizenportal:latest .
+	docker build --no-cache --pull -f docker/Dockerfile --build-arg build_number=$(BUILD_NUMBER) --build-arg version=$(VERSION) -t iadelib/citizenportal:latest .
