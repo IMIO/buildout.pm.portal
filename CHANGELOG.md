@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### buildout.pm.portal
+
+- DELIBE-347: Use plone.namedfile 8.1.2 so that a file range request stops at
+  the end of the range. This removes the waitress "application-written content
+  exceeded the number of bytes specified by Content-Length header" warnings.
+  [aduchene]
+
 ## Release 2.7.4
 
 **Date:** 2026-11-16
