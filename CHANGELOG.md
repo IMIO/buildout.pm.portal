@@ -1,11 +1,35 @@
 # Changelog
 
-## Unreleased
+## Release 2.7.4
+
+**Date:** 2026-11-16
+
+
+### plonemeeting.portal.core (2.6.1 → 2.6.2)
+
+#### Version 2.6.2 (2026-11-16)
+
+- DELIBE-333: Refuse a meeting import or synchronization when another one is
+  running for the same institution, and send the import and synchronization
+  forms only one time.
+  [aduchene]
+- DELIBE-328: Show the buildout release version in the footer instead of the
+  plonemeeting.portal.core version. The footer reads the version and the build
+  number from one ``.version`` file (``version=...`` and ``build=...`` lines)
+  in the instance working directory. It no longer reads ``.build_number``.
+  When the file is not there, it shows the plonemeeting.portal.core version
+  and no build number.
+  [aduchene]
+- DELIBE-343: Let Managers edit the date of a meeting. The ``date_time`` field
+  used a permission title in place of a permission id, so the edit form hid it
+  from everyone.
+  [aduchene]
 
 ### buildout.pm.portal
 
 - DELIBE-350: Add `scripts/clean_orphan_rids.py` to find and remove the orphan
   rids of the `portal_catalog`.
+  [aduchene]
 - DELIBE-345: Raise the ``curl`` timeout of ``docker/tick.sh`` from 10 s to
   300 s, so a slow ``@@tick_fifteen`` is no longer logged as failed. Use
   ``--fail-with-body``, so an HTTP error is logged as a failure with its
@@ -24,6 +48,7 @@
   ``docker-image`` make target passes ``$(VERSION)``. The footer of
   plonemeeting.portal.core reads this file to show the version and the
   build number.
+  [aduchene]
 - Use ``zc.buildout==5.2.0`` again in ``versions.cfg``, ``requirements.txt``
   and ``docker/Dockerfile``. zc.buildout 6.0.2 processes the ``-nspkg.pth``
   files of develop eggs, so a recipe does not load when it shares a
