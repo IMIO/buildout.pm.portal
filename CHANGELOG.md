@@ -4,6 +4,8 @@
 
 ### buildout.pm.portal
 
+- DELIBE-350: Add `scripts/clean_orphan_rids.py` to find and remove the orphan
+  rids of the `portal_catalog`.
 - DELIBE-345: Raise the ``curl`` timeout of ``docker/tick.sh`` from 10 s to
   300 s, so a slow ``@@tick_fifteen`` is no longer logged as failed. Use
   ``--fail-with-body``, so an HTTP error is logged as a failure with its
