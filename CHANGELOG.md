@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### buildout.pm.portal
+
+- DELIBE-350: Add `scripts/clean_orphan_rids.py` to find and remove the orphan
+  rids of the `portal_catalog`.
+  [aduchene]
+
 ## Release 2.7.2
 
 **Date:** 2026-11-04
