@@ -15,6 +15,14 @@
   (``No module named 'imio.recipe'``), so the CI of the packages that extend
   ``dev.cfg`` fails.
   [aduchene]
+- DELIBE-328: The Docker image build writes one ``/plone/.version`` file
+  with ``version=`` and ``build=`` lines. It replaces ``.build_number``. A
+  new ``version`` build argument gives the version: the GitHub workflows
+  pass the tag for a release image (``2.7.3``), else the branch name. The
+  ``docker-image`` make target passes ``$(VERSION)``. The footer of
+  plonemeeting.portal.core reads this file to show the version and the
+  build number.
+  [aduchene]
 
 ## Release 2.7.3
 

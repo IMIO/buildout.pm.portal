@@ -28,4 +28,6 @@ jobs:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.DELIB_MATTERMOST_WEBHOOK_URL }}
           CONTEXT: '.'
           DOCKERFILE: 'docker/Dockerfile'
-          BUILD_ARGS: 'build_number=${{ env.BUILD_NUMBER }}'
+          BUILD_ARGS: |
+            build_number=${{ env.BUILD_NUMBER }}
+            version=${{ github.ref_name }}
