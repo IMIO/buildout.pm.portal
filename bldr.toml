@@ -41,6 +41,10 @@ name = "imio.emailkit"
 allow_prerelease = true
 
 [[packages]]
+name = "imio.map.wallonia"
+allow_prerelease = true
+
+[[packages]]
 name = "imio.recipe.emailkit"
 allow_prerelease = true
 
