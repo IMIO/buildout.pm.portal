@@ -8,6 +8,11 @@
   the end of the range. This removes the waitress "application-written content
   exceeded the number of bytes specified by Content-Length header" warnings.
   [aduchene]
+- Use ``collective.timedevents==2.0.0`` in ``dev.cfg``. The
+  ``collective.autopublishing`` checkout now requires this version, so the
+  buildout of the packages that extend ``dev.cfg`` failed. ``versions.cfg``
+  keeps 1.1 for the released ``collective.autopublishing``.
+  [aduchene]
 
 ## Release 2.7.4
 
