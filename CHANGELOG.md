@@ -13,6 +13,10 @@
   buildout of the packages that extend ``dev.cfg`` failed. ``versions.cfg``
   keeps 1.1 for the released ``collective.autopublishing``.
   [aduchene]
+- DELIBE-351: Use ``imio.map.wallonia==1.0.0a1``, the add-on that provides
+  the homepage map of ``plonemeeting.portal.core``, and follow its releases
+  with bldr.
+  [aduchene]
 
 ## Release 2.7.4
 
