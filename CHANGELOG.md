@@ -1,6 +1,41 @@
 # Changelog
 
-## Unreleased
+## Release 2.7.5
+
+**Date:** 2026-11-20
+
+
+### plonemeeting.portal.core (2.6.2 → 2.6.3)
+
+#### Version 2.6.3 (2026-11-20)
+
+- DELIBE-353: Show the PDF of a publication with the ``pat-pdf-viewer``
+  pattern of the new ``imio.pdfviewer`` add-on, in place of the
+  ``x-pdf-viewer`` element. The viewer has a text layer and clickable links,
+  continuous scroll, fit to width or page, touch gestures and a real full
+  screen, and loads pdf.js from the site. The upgrade step to 2602 installs
+  the add-on.
+  [aduchene]
+- DELIBE-351: Move the homepage map to the new ``imio.map.wallonia`` add-on,
+  as the ``pat-wallonia-map`` pattern. The homepage uses it in place of the
+  ``x-institution-map`` element and gives it one link for each published
+  institution. The upgrade step to 2601 installs the add-on.
+  [aduchene]
+- DELIBE-352: Remove the ``institution-locations`` view and the municipality
+  locations it stored on the portal. The map data now ships with
+  ``imio.map.wallonia``. The upgrade step to 2601 removes the stored data.
+  [aduchene]
+
+### plonetheme.deliberations (1.10 → 1.11)
+
+#### Version 1.11 (2026-11-20)
+
+- DELIBE-353: Give the PDF viewer of ``imio.pdfviewer`` the Délibérations
+  colors with its custom properties, in light and dark mode, and keep its
+  toolbar under the Plone toolbar. The rules for the old viewer go, with
+  the dark mode rules for ``.btn`` and ``.border-end`` that applied to the
+  whole site.
+  [aduchene]
 
 ### buildout.pm.portal
 
