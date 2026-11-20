@@ -17,7 +17,7 @@
   the homepage map of ``plonemeeting.portal.core``, and follow its releases
   with bldr.
   [aduchene]
-- DELIBE-353: Use ``imio.pdfviewer==1.0.0``, the add-on that provides the PDF
+- DELIBE-353: Use ``imio.pdfviewer==1.0.1``, the add-on that provides the PDF
   viewer of ``plonemeeting.portal.core``, and follow its releases with bldr.
   Use ``imio.map.wallonia==1.0.0a2``: the two add-ons share one React, and
   with 1.0.0a1 the PDF viewer stops with React error #527.
