@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### buildout.pm.portal
+
+- DELIBE-321: Add ``scripts/ocr_backfill.py``. It generates the text version
+  of the PDF file of the existing publications, and checks that no
+  qualified timestamp changes.
+  [aduchene]
+- DELIBE-321: Add the source of the new ``imio.omnia.ocr`` add-on.
+  [aduchene]
+
 ## Release 2.7.5
 
 **Date:** 2026-11-20
